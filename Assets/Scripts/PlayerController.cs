@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 
 		if (gamePad) {
-			moveDirection = new Vector3(Input.GetAxis("GamepadMoveHorizontal"), Input.GetAxis("GamepadMoveVertical"), 0);
+			moveDirection = new Vector3(Input.GetAxis("GamepadMoveHorizontal"), (-1 * Input.GetAxis("GamepadMoveVertical")), 0);
 
 
 			deltaX = Input.GetAxis("GamepadAimHorizontal");
@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour {
 
 			//angle = angle * 180/Mathf.PI + 90;
 				if (direction.magnitude > radialDeadZone){
-					Vector3 targetRotation = new Vector3(0,angle,0);
+					Vector3 targetRotation = new Vector3(0,0,angle);
 					Debug.Log (angle);
 					transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(targetRotation), 1f);
 				}
