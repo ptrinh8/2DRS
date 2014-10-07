@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D collision)
 	{
 		Debug.Log ("hit");
-		if (collision.gameObject.name == "Enemy(Clone)")
+		if (collision.gameObject.name == "Enemy(Clone)" || collision.gameObject.name == "EnemyStraight(Clone)")
 		{
 			collision.gameObject.SetActive(false);
 			health--;
