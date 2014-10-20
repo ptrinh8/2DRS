@@ -4,7 +4,7 @@ using System.Collections;
 public class EnemyFollowScript : MonoBehaviour {
 
 	private Transform player;
-	private int speed = 10;
+	private int speed = 5;
 	private int minimumDistance = 0;
 	private int maximumDistance;
 	private Vector2 velocity;
@@ -25,8 +25,6 @@ public class EnemyFollowScript : MonoBehaviour {
 
 		heading = player.transform.position - this.transform.position;
 		heading.Normalize();
-		
-
 
 		if (this.gameObject.activeInHierarchy == true)
 		{
@@ -43,9 +41,45 @@ public class EnemyFollowScript : MonoBehaviour {
 		{
 			if (collision.gameObject.name == "Bullet(Clone)")
 			{
+				EmitParticles();
 				gameObject.SetActive(false);
 				collision.gameObject.SetActive(false);
 			}
+
+			if (collision.gameObject.name == "Player")
+			{
+				EmitParticles();
+				gameObject.SetActive(false);
+			}
 		}
+	}
+
+	void OnEnable()
+	{
+		player = GameObject.Find("Player").GetComponent<Transform>();
+		heading = player.transform.position - this.transform.position;
+		heading.Normalize();
+	}
+
+	void EmitParticles()
+	{
+		GameObject obj = ParticleSystemPooler.current.GetPooledObject();
+		
+		if (obj == null)
+		{
+			return;
+		}
+		
+		if (obj.gameObject.name == "ParticleSystem(Clone)")
+		{
+			obj.transform.position = transform.position;
+			obj.SetActive(true);
+			obj.particleSystem.Play();
+		}
+	}
+
+	void OnBecameInvisible()
+	{
+		gameObject.SetActive(false);
 	}
 }

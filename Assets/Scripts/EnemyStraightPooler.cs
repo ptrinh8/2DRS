@@ -25,6 +25,7 @@ public class EnemyStraightPooler : MonoBehaviour {
 		{
 			GameObject obj = (GameObject)Instantiate(pooledObject);
 			obj.SetActive(false);
+			obj.transform.parent = this.transform;
 			pooledObjects.Add(obj);
 		}
 	}
@@ -47,6 +48,7 @@ public class EnemyStraightPooler : MonoBehaviour {
 		if(willGrow)
 		{
 			GameObject obj = (GameObject)Instantiate(pooledObject);
+			obj.transform.parent = this.transform;
 			pooledObjects.Add(obj);
 			return obj;
 		}

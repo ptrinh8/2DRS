@@ -25,6 +25,7 @@ public class BulletPooler : MonoBehaviour {
 		{
 			GameObject obj = (GameObject)Instantiate(pooledObject);
 			obj.SetActive(false);
+			obj.transform.parent = this.transform;
 			pooledObjects.Add(obj);
 		}
 	}

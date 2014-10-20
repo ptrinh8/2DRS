@@ -6,13 +6,31 @@ public class AudioXFade : MonoBehaviour {
 	private AudioSource silence;
 	private AudioSource loop;
 	private AudioSource loop2;
-	private int cubeKillAmount1;
 	public AudioSource[] loopArray;
-	private int numberOfSongSections = 0;
-	private int[] cubeKillArray;
+
+	private AudioSource kickLoop1;
+	private AudioSource kickLoop2;
+	public AudioSource[] kickArray;
+
+	private AudioSource snareLoop1;
+	private AudioSource snareLoop2;
+	public AudioSource[] snareArray;
+
+	private AudioSource hatLoop1;
+	private AudioSource hatLoop2;
+	public AudioSource[] hatArray;
+
+	private AudioSource clapLoop1;
+	private AudioSource clapLoop2;
+	public AudioSource[] clapArray;
+
+	private int spawnKillAmount1;
+	private int spawnKillAmount2;
+	private int numberOfSongSections = 2;
+	private int[] spawnKillArray;
 	public int loopArrayIterator = 0;
 	private AudioSource numberOfLoops;
-	public int cubesKilled = 0;
+	public int spawnsKilled = 0;
 	public int songSection = 0;
 	public double dspOffset = 0;
 	public double dspTime = 0;
@@ -27,6 +45,8 @@ public class AudioXFade : MonoBehaviour {
 	public bool songEnded = false;
 	
 	public bool isLoopPlaying = false;
+
+	public SongScript songScript;
 
 	
 	// Use this for initialization
@@ -74,9 +94,30 @@ public class AudioXFade : MonoBehaviour {
 		loop = GameObject.Find ("SeeYaLoop1").GetComponent<AudioSource>();
 		loop2 = GameObject.Find ("SeeYaLoop2").GetComponent<AudioSource>();
 		loopArray = new AudioSource[]{loop, loop2};
-		numberOfSongSections = 3;
-		cubeKillAmount1 = 50;
-		cubeKillArray = new int[]{cubeKillAmount1};
+		spawnsKilled = GameObject.Find ("Player").GetComponent<PlayerController>().spawnsKilled;
+		numberOfSongSections = 2;
+		spawnKillAmount1 = 1;
+		spawnKillAmount2 = 5;
+		spawnKillArray = new int[]{spawnKillAmount1, spawnKillAmount2};
+
+		kickLoop1 = GameObject.Find ("KickLoop1").GetComponent<AudioSource>();
+		kickLoop2 = GameObject.Find ("KickLoop2").GetComponent<AudioSource>();
+		kickArray = new AudioSource[]{kickLoop1, kickLoop2};
+
+		hatLoop1 = GameObject.Find ("HatLoop1").GetComponent<AudioSource>();
+		hatLoop2 = GameObject.Find ("HatLoop2").GetComponent<AudioSource>();
+		hatArray = new AudioSource[]{hatLoop1, hatLoop2};
+
+		clapLoop1 = GameObject.Find ("ClapLoop1").GetComponent<AudioSource>();
+		clapLoop2 = GameObject.Find ("ClapLoop2").GetComponent<AudioSource>();
+		clapArray = new AudioSource[]{clapLoop1, clapLoop2};
+
+		snareLoop1 = GameObject.Find ("SnareLoop1").GetComponent<AudioSource>();
+		snareLoop2 = GameObject.Find ("SnareLoop2").GetComponent<AudioSource>();
+		snareArray = new AudioSource[]{snareLoop1, snareLoop2};
+
+		songScript = GameObject.Find ("SongScript").GetComponent<SongScript>();
+
 		//pauseScript = GameObject.Find ("Paused").GetComponent<PauseScript>();
 		//StartCoroutine(waitUntilEnd());
 		
@@ -87,15 +128,22 @@ public class AudioXFade : MonoBehaviour {
 	{
 		if (Application.loadedLevelName != "MenuScene")
 		{
-			if (isStarted == false && silence.isPlaying == false)
+			if (Input.GetKeyDown(KeyCode.Space))
 			{
-				loopArray[0].Play();
-				silence.Play();
-				silence.loop = true;
-				songSection = 0;
-				isStarted = true;
-				clipTriggered = false;
-				songEnded = false;
+				if (isStarted == false && silence.isPlaying == false)
+				{
+					loopArray[0].Play();
+					kickArray[0].Play();
+					hatArray[0].Play();
+					clapArray[0].Play();
+					snareArray[0].Play();
+					silence.Play();
+					silence.loop = true;
+					songSection = 0;
+					isStarted = true;
+					clipTriggered = false;
+					songEnded = false;
+				}
 			}
 		}
 	}
@@ -116,6 +164,7 @@ public class AudioXFade : MonoBehaviour {
 	
 	void FixedUpdate()
 	{
+		spawnsKilled = GameObject.Find ("Player").GetComponent<PlayerController>().spawnsKilled;
 		StartCoroutine(waitUntilEnd());
 		isLoopPlaying = loopArray[songSection].isPlaying;
 		//dspTime = AudioSettings.dspTime;
@@ -140,10 +189,10 @@ public class AudioXFade : MonoBehaviour {
 			Debug.Log ("looparrayisplaying");
 		}*/
 		
-		if (cubesKilled >= cubeKillArray[songSection] && clipTriggered == false/* && pauseScript.isPaused == false*/)
+		if (spawnsKilled >= spawnKillArray[songSection] && clipTriggered == false/* && pauseScript.isPaused == false*/)
 		{
-			Debug.Log (cubesKilled);
-			Debug.Log (cubesKilled >= cubeKillArray[songSection + 1]);
+			Debug.Log (spawnsKilled);
+			//Debug.Log (spawnsKilled >= spawnKillArray[songSection + 1]);
 			if (songSection == numberOfSongSections)
 			{
 				Debug.Log ("hello");
@@ -158,7 +207,7 @@ public class AudioXFade : MonoBehaviour {
 					isStarted = false;
 					clipTriggered = false;
 					silence.loop = false;
-					cubesKilled = 0;
+					spawnsKilled = 0;
 				}
 			}
 			else
@@ -168,11 +217,24 @@ public class AudioXFade : MonoBehaviour {
 				//dspOffset = AudioSettings.dspTime + offset;
 				loopArray[songSection + 1].PlayDelayed(offset);
 				loopArray[songSection].loop = false;
+
+				kickArray[songSection + 1].PlayDelayed(offset);
+				hatArray[songSection + 1].PlayDelayed(offset);
+				snareArray[songSection + 1].PlayDelayed(offset);
+				clapArray[songSection + 1].PlayDelayed(offset);
+
+				kickArray[songSection].loop = false;
+				hatArray[songSection].loop = false;
+				snareArray[songSection].loop = false;
+				clapArray[songSection].loop = false;
 				clipTriggered = true;
+				songScript.activeChecked = false;
 				//Debug.Log ("ClipPlaying");
 				//Debug.Log (clipTriggered);
 			}
 		}
+
+
 		
 		/*
 		if ((dspTime + 1.0 > dspOffset) && clipTriggered == true)

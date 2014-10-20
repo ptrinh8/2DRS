@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour {
 
 	//Handling
 	public float rotationSpeed = 450f;
-	public float speed = 1;
+	private float speed = 5;
 	//public float gravity = 20.0f;
 	public float timer;
 	private float bulletFireRate = .05f;
@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
 	private int bulletSpeed = 20;
 	private float radialDeadZone = .25f;
 	public int health = 3;
+	public int spawnsKilled = 0;
 
 	public float vertExtent;
 	public float horzExtent;
@@ -25,7 +26,7 @@ public class PlayerController : MonoBehaviour {
 	//private CharacterController controller;
 
 	//System
-	private Vector3 moveDirection = Vector3.zero;
+	public Vector3 moveDirection = Vector3.zero;
 	private bool gamePad;
 
 	void Start () {
@@ -62,6 +63,7 @@ public class PlayerController : MonoBehaviour {
 			if (direction.magnitude > radialDeadZone)
 			{
 				Vector3 targetRotation = new Vector3(0,0,angle);
+				direction.Normalize();
 				bulletDirection.x = direction.x * bulletSpeed;
 				bulletDirection.y = direction.y * bulletSpeed;
 				timer += Time.deltaTime;
@@ -86,7 +88,20 @@ public class PlayerController : MonoBehaviour {
 			moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
 
 			var v3 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			//v3.z = 25f;
+
+			if (Input.GetMouseButton(0))
+			{
+				timer += Time.deltaTime;
+				Vector3 mouse = Camera.main.WorldToScreenPoint(transform.position);
+				Vector3 direction = (Input.mousePosition - mouse).normalized;
+				bulletDirection.x = direction.x * bulletSpeed;
+				bulletDirection.y = direction.y * bulletSpeed;
+				if (timer >= bulletFireRate)
+				{
+					FireBullet();
+					timer = 0;
+				}
+			}
 
 			transform.rotation = Quaternion.LookRotation(Vector3.forward, v3 - this.transform.position);
 		}
@@ -116,11 +131,10 @@ public class PlayerController : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D collision)
 	{
-		Debug.Log ("hit");
-		if (collision.gameObject.name == "Enemy(Clone)" || collision.gameObject.name == "EnemyStraight(Clone)")
+		//Debug.Log ("hit");
+		if (collision.gameObject.name == "EnemyFollow(Clone)" || collision.gameObject.name == "EnemyStraight(Clone)" || collision.gameObject.name == "EnemyDumb(Clone)")
 		{
-			collision.gameObject.SetActive(false);
-			health--;
+			//collision.gameObject.SetActive(false);
 		}
 	}
 }

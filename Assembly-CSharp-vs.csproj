@@ -51,14 +51,19 @@
      <Compile Include="Assets\Scripts\BulletController.cs" />
      <Compile Include="Assets\Scripts\BulletPooler.cs" />
      <Compile Include="Assets\Scripts\EnemyController.cs" />
+     <Compile Include="Assets\Scripts\EnemyDumbPooler.cs" />
+     <Compile Include="Assets\Scripts\EnemyDumbScript.cs" />
+     <Compile Include="Assets\Scripts\EnemyFollowPooler.cs" />
      <Compile Include="Assets\Scripts\EnemyFollowScript.cs" />
-     <Compile Include="Assets\Scripts\EnemyPooler.cs" />
      <Compile Include="Assets\Scripts\EnemyStraightPooler.cs" />
      <Compile Include="Assets\Scripts\EnemyStraightScript.cs" />
      <Compile Include="Assets\Scripts\MetronomeTimer.cs" />
      <Compile Include="Assets\Scripts\ObjectPooler.cs" />
+     <Compile Include="Assets\Scripts\ParticleSystemPooler.cs" />
+     <Compile Include="Assets\Scripts\ParticleSystemScript.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\SongScript.cs" />
+     <Compile Include="Assets\Scripts\VolumeControl.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
