@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
 	private float speed = 5;
 	//public float gravity = 20.0f;
 	public float timer;
+
 	private float bulletFireRate = .05f;
 	private float deltaX;
 	private float deltaY;
@@ -19,8 +20,17 @@ public class PlayerController : MonoBehaviour {
 	public int health = 3;
 	public int spawnsKilled = 0;
 
+	private float boostTimer;
+	private float boostTime;
+	private float boostRechargeTime = 6f;
+	public float boostRechargeTimer;
+	private Vector3 boostDirection = Vector3.zero;
+
 	public float vertExtent;
 	public float horzExtent;
+
+	private bool boosting = false;
+	public bool canBoost = true;
 
 	//Components
 	//private CharacterController controller;
@@ -40,6 +50,8 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			gamePad = true;
 		}
+
+		boostTime = .3f;
 	}
 	
 	void Update () {
@@ -54,8 +66,45 @@ public class PlayerController : MonoBehaviour {
 
 
 			float angle = Mathf.Atan2(deltaY,deltaX) * 180/Mathf.PI + 90;
-
-
+			
+			if (canBoost == true)
+			{
+				if (Input.GetButtonDown("Button0"))
+				{
+					boosting = true;
+					canBoost = false;
+					boostRechargeTimer = 0;
+					boostTimer = 0;
+					boostDirection = moveDirection;
+				}
+			}
+			else if (canBoost == false)
+			{
+				if (boostRechargeTimer >= boostRechargeTime)
+				{
+					canBoost = true;
+				}
+			}
+			
+			if (boosting == true)
+			{
+				boostTimer += Time.deltaTime;
+				if (boostTimer <= boostTime)
+				{
+					speed = 15;
+					moveDirection = boostDirection;
+				}
+				else
+				{
+					speed = 5;
+					boosting = false;
+				}
+				rigidbody2D.velocity = moveDirection * speed;
+			}
+			else
+			{
+				rigidbody2D.velocity = moveDirection * speed;
+			}
 
 			if (direction.magnitude > 0) {
 
@@ -89,6 +138,8 @@ public class PlayerController : MonoBehaviour {
 
 			var v3 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+			boostRechargeTimer += Time.deltaTime;
+
 			if (Input.GetMouseButton(0))
 			{
 				timer += Time.deltaTime;
@@ -103,6 +154,45 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 
+			if (canBoost == true)
+			{
+				if (Input.GetMouseButton (1))
+				{
+					boosting = true;
+					canBoost = false;
+					boostRechargeTimer = 0;
+					boostTimer = 0;
+					boostDirection = moveDirection;
+				}
+			}
+			else if (canBoost == false)
+			{
+				if (boostRechargeTimer >= boostRechargeTime)
+				{
+					canBoost = true;
+				}
+			}
+
+			if (boosting == true)
+			{
+				boostTimer += Time.deltaTime;
+				if (boostTimer <= boostTime)
+				{
+					speed = 15;
+					moveDirection = boostDirection;
+				}
+				else
+				{
+					speed = 5;
+					boosting = false;
+				}
+				rigidbody2D.velocity = moveDirection * speed;
+			}
+			else
+			{
+				rigidbody2D.velocity = moveDirection * speed;
+			}
+
 			transform.rotation = Quaternion.LookRotation(Vector3.forward, v3 - this.transform.position);
 		}
 
@@ -111,7 +201,7 @@ public class PlayerController : MonoBehaviour {
 			this.gameObject.SetActive(false);
 		}
 
-		rigidbody2D.velocity = moveDirection * speed;
+		//rigidbody2D.velocity = moveDirection * speed;
 	}
 
 	void FireBullet()

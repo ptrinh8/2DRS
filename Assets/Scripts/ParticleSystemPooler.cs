@@ -6,7 +6,7 @@ public class ParticleSystemPooler : MonoBehaviour {
 	
 	public static ParticleSystemPooler current;
 	public GameObject pooledObject;
-	public int pooledAmount = 20;
+	public int pooledAmount = 60;
 	public bool willGrow = true;
 	
 	List<GameObject> pooledObjects;

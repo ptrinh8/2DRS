@@ -8,8 +8,8 @@ public class BulletPooler : MonoBehaviour {
 	public GameObject pooledObject;
 	public int pooledAmount = 20;
 	public bool willGrow = true;
-	
-	List<GameObject> pooledObjects;
+
+	public List<GameObject> pooledObjects;
 	
 	// Use this for initialization
 	

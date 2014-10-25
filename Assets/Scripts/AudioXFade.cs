@@ -7,33 +7,30 @@ public class AudioXFade : MonoBehaviour {
 	private AudioSource loop;
 	private AudioSource loop2;
 	public AudioSource[] loopArray;
-
-	private AudioSource kickLoop1;
-	private AudioSource kickLoop2;
+	
 	public AudioSource[] kickArray;
-
-	private AudioSource snareLoop1;
-	private AudioSource snareLoop2;
 	public AudioSource[] snareArray;
-
-	private AudioSource hatLoop1;
-	private AudioSource hatLoop2;
 	public AudioSource[] hatArray;
-
-	private AudioSource clapLoop1;
-	private AudioSource clapLoop2;
 	public AudioSource[] clapArray;
+	public AudioSource[] glitchArray;
+	public AudioSource[] gb1Pul1Array;
+	public AudioSource[] gb1Pul2Array;
+	public AudioSource[] gb1WavArray;
+	public AudioSource[] gb2Pul1Array;
+	public AudioSource[] gb2Pul2AndWavArray;
+
+	private int loopLoopNumber;
 
 	private int spawnKillAmount1;
 	private int spawnKillAmount2;
 	private int numberOfSongSections = 2;
 	private int[] spawnKillArray;
-	public int loopArrayIterator = 0;
+	private int loopArrayIterator = 0;
 	private AudioSource numberOfLoops;
 	public int spawnsKilled = 0;
 	public int songSection = 0;
-	public double dspOffset = 0;
-	public double dspTime = 0;
+	private double dspOffset = 0;
+	private double dspTime = 0;
 	//private PauseScript pauseScript;
 	
 	public bool isStarted = false;
@@ -91,30 +88,29 @@ public class AudioXFade : MonoBehaviour {
 		silence = GameObject.Find ("AudioSource").GetComponent<AudioSource>();
 		isStarted = false;
 		metronome = GameObject.Find ("AudioSource").GetComponent<MetronomeTimer>();
-		loop = GameObject.Find ("SeeYaLoop1").GetComponent<AudioSource>();
-		loop2 = GameObject.Find ("SeeYaLoop2").GetComponent<AudioSource>();
-		loopArray = new AudioSource[]{loop, loop2};
+		loop = GameObject.Find ("LoopLoop1").GetComponent<AudioSource>();
 		spawnsKilled = GameObject.Find ("Player").GetComponent<PlayerController>().spawnsKilled;
 		numberOfSongSections = 2;
 		spawnKillAmount1 = 1;
 		spawnKillAmount2 = 5;
 		spawnKillArray = new int[]{spawnKillAmount1, spawnKillAmount2};
 
-		kickLoop1 = GameObject.Find ("KickLoop1").GetComponent<AudioSource>();
-		kickLoop2 = GameObject.Find ("KickLoop2").GetComponent<AudioSource>();
-		kickArray = new AudioSource[]{kickLoop1, kickLoop2};
+		loopLoopNumber = 13;
 
-		hatLoop1 = GameObject.Find ("HatLoop1").GetComponent<AudioSource>();
-		hatLoop2 = GameObject.Find ("HatLoop2").GetComponent<AudioSource>();
-		hatArray = new AudioSource[]{hatLoop1, hatLoop2};
 
-		clapLoop1 = GameObject.Find ("ClapLoop1").GetComponent<AudioSource>();
-		clapLoop2 = GameObject.Find ("ClapLoop2").GetComponent<AudioSource>();
-		clapArray = new AudioSource[]{clapLoop1, clapLoop2};
+		loopArray = new AudioSource[loopLoopNumber];
+		kickArray = new AudioSource[loopLoopNumber];
+		snareArray = new AudioSource[loopLoopNumber];
+		clapArray = new AudioSource[loopLoopNumber];
+		hatArray = new AudioSource[loopLoopNumber];
+		glitchArray = new AudioSource[loopLoopNumber];
+		gb1Pul1Array = new AudioSource[loopLoopNumber];
+		gb1Pul2Array = new AudioSource[loopLoopNumber];
+		gb1WavArray = new AudioSource[loopLoopNumber];
+		gb2Pul1Array = new AudioSource[loopLoopNumber];
+		gb2Pul2AndWavArray = new AudioSource[loopLoopNumber];
 
-		snareLoop1 = GameObject.Find ("SnareLoop1").GetComponent<AudioSource>();
-		snareLoop2 = GameObject.Find ("SnareLoop2").GetComponent<AudioSource>();
-		snareArray = new AudioSource[]{snareLoop1, snareLoop2};
+		SetUpLoopArrays();
 
 		songScript = GameObject.Find ("SongScript").GetComponent<SongScript>();
 
@@ -137,6 +133,12 @@ public class AudioXFade : MonoBehaviour {
 					hatArray[0].Play();
 					clapArray[0].Play();
 					snareArray[0].Play();
+					glitchArray[0].Play();
+					gb1Pul1Array[0].Play();
+					gb1Pul2Array[0].Play();
+					gb1WavArray[0].Play ();
+					gb2Pul1Array[0].Play ();
+					gb2Pul2AndWavArray[0].Play();
 					silence.Play();
 					silence.loop = true;
 					songSection = 0;
@@ -160,6 +162,49 @@ public class AudioXFade : MonoBehaviour {
 			}
 		}
 		yield return null;
+	}
+
+	void SetUpLoopArrays()
+	{
+
+		for (int i = 0; i < loopLoopNumber; i++)
+		{
+			string loopString = "LoopLoop" + (i + 1);
+			string kickString = "KickLoop" + (i + 1);
+			string clapString = "ClapLoop" + (i + 1);
+			string hatString = "HatLoop" + (i + 1);
+			string snareString = "SnareLoop" + (i + 1);
+			string glitchString = "GlitchLoop" + (i + 1);
+			string gb1Pul1String = "GB1Pul1Loop" + (i + 1);
+			string gb1Pul2String = "GB1Pul2Loop" + (i + 1);
+			string gb1WavString = "GB1WavLoop" + (i + 1);
+			string gb2Pul1String = "GB2Pul1Loop" + (i + 1);
+			string gb2Pul2AndWavString = "GB2Pul2AndWavLoop" + (i + 1);
+
+			AudioSource loopObject = GameObject.Find (loopString).GetComponent<AudioSource>();
+			AudioSource kickObject = GameObject.Find (kickString).GetComponent<AudioSource>();
+			AudioSource clapObject = GameObject.Find (clapString).GetComponent<AudioSource>();
+			AudioSource hatObject = GameObject.Find (hatString).GetComponent<AudioSource>();
+			AudioSource snareObject = GameObject.Find (snareString).GetComponent<AudioSource>();
+			AudioSource glitchObject = GameObject.Find (glitchString).GetComponent<AudioSource>();
+			AudioSource gb1Pul1Object = GameObject.Find (gb1Pul1String).GetComponent<AudioSource>();
+			AudioSource gb1Pul2Object = GameObject.Find (gb1Pul2String).GetComponent<AudioSource>();
+			AudioSource gb1WavObject = GameObject.Find (gb1WavString).GetComponent<AudioSource>();
+			AudioSource gb2Pul1Object = GameObject.Find (gb2Pul1String).GetComponent<AudioSource>();
+			AudioSource gb2Pul2AndWavObject = GameObject.Find (gb2Pul2AndWavString).GetComponent<AudioSource>();
+
+			loopArray[i] = loopObject;
+			kickArray[i] = kickObject;
+			clapArray[i] = clapObject;
+			hatArray[i] = hatObject;
+			snareArray[i] = snareObject;
+			glitchArray[i] = glitchObject;
+			gb1Pul1Array[i] = gb1Pul1Object;
+			gb1Pul2Array[i] = gb1Pul2Object;
+			gb1WavArray[i] = gb1WavObject;
+			gb2Pul1Array[i] = gb2Pul1Object;
+			gb2Pul2AndWavArray[i] = gb2Pul2AndWavObject;
+		}
 	}
 	
 	void FixedUpdate()
@@ -222,25 +267,28 @@ public class AudioXFade : MonoBehaviour {
 				hatArray[songSection + 1].PlayDelayed(offset);
 				snareArray[songSection + 1].PlayDelayed(offset);
 				clapArray[songSection + 1].PlayDelayed(offset);
+				glitchArray[songSection + 1].PlayDelayed(offset);
+				gb1Pul1Array[songSection + 1].PlayDelayed(offset);
+				gb1Pul2Array[songSection + 1].PlayDelayed(offset);
+				gb1WavArray[songSection + 1].PlayDelayed(offset);
+				gb2Pul1Array[songSection + 1].PlayDelayed(offset);
+				gb2Pul2AndWavArray[songSection + 1].PlayDelayed(offset);
 
 				kickArray[songSection].loop = false;
 				hatArray[songSection].loop = false;
 				snareArray[songSection].loop = false;
 				clapArray[songSection].loop = false;
+				glitchArray[songSection].loop = false;
+				gb1Pul1Array[songSection].loop = false;
+				gb1Pul2Array[songSection].loop = false;
+				gb1WavArray[songSection].loop = false;
+				gb2Pul1Array[songSection].loop = false;
+				gb2Pul2AndWavArray[songSection].loop = false;
+
 				clipTriggered = true;
 				songScript.activeChecked = false;
-				//Debug.Log ("ClipPlaying");
-				//Debug.Log (clipTriggered);
 			}
 		}
-
-
-		
-		/*
-		if ((dspTime + 1.0 > dspOffset) && clipTriggered == true)
-		{
-			loopArray[songSection + 1].PlayScheduled(offset);
-			Debug.Log ("Really playing this time!");
-		}*/
 	}
+	
 }

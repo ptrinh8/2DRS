@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour {
 		metronome = GameObject.Find ("AudioSource").GetComponent<MetronomeTimer>();
 		scale = this.transform.localScale;
 		position = this.transform.position;
-		health = 50;
+		health = 100;
 		enemyHeading = 0;
 		theCamera = GameObject.Find ("Main Camera").GetComponent<Camera>();
 		songScript = GameObject.Find ("SongScript").GetComponent<SongScript>();
@@ -74,7 +74,7 @@ public class EnemyController : MonoBehaviour {
 		{
 			if (enemyType == 1)
 			{
-				for (int i = 0; i < numberOfEnemies; i++)
+				for (int i = 0; i <= numberOfEnemies; i++)
 				{
 					GameObject enemy = EnemyFollowPooler.current.GetPooledObject();
 					if (enemy == null)
@@ -91,7 +91,7 @@ public class EnemyController : MonoBehaviour {
 			else if (enemyType == 2)
 			{
 				position = new Vector2(this.transform.position.x, this.transform.position.y);
-				for (int i = 0; i < numberOfEnemies; i++)
+				for (int i = 0; i <= numberOfEnemies; i++)
 				{
 					GameObject enemy = EnemyStraightPooler.current.GetPooledObject();
 					if (enemy == null)
@@ -109,7 +109,7 @@ public class EnemyController : MonoBehaviour {
 			{
 				/*angle = 360f / (float)numberOfEnemies;
 				enemyHeading = 0;*/
-				for (int i = 0; i < numberOfEnemies; i++)
+				for (int i = 0; i <= numberOfEnemies; i++)
 				{
 					GameObject enemy = EnemyDumbPooler.current.GetPooledObject();
 					enemyDumb = enemy.GetComponent<EnemyDumbScript>();
@@ -137,9 +137,28 @@ public class EnemyController : MonoBehaviour {
 
 				}
 			}
+			else if (enemyType == 4)
+			{
+				for (int i = 0; i <= numberOfEnemies; i++)
+				{
+					GameObject enemy = EnemyAvoidPooler.current.GetPooledObject();
+					if (enemy == null)
+					{
+						return;
+					}
+					
+					enemy.transform.position = position;
+					enemy.transform.rotation = transform.rotation;
+					enemy.SetActive(true);
+					position = new Vector2((this.transform.position.x + (Random.Range(-1, 1) * .75f)), (this.transform.position.y + (Random.Range(-1, 1) * .75f)));
+				}
+			}
 			this.transform.localScale = new Vector3(2f, 2f, 1f);
-			theCamera.backgroundColor = instrumentColor;
-			songScript.cameraColor = instrumentColor;
+			if (this.gameObject.name != "Hat")
+			{
+				theCamera.backgroundColor = instrumentColor;
+				songScript.cameraColor = instrumentColor;
+			}
 		}
 		else
 		{

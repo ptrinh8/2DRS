@@ -20,15 +20,23 @@ public class SongScript : MonoBehaviour {
 	private EnemyController snareController;
 	private EnemyController hatController;
 	private EnemyController clapController;
-	private EnemyController gb1Controller;
-	private EnemyController gb2Controller;
+	private EnemyController glitchController;
+	private EnemyController gb1Pul1Controller;
+	private EnemyController gb1Pul2Controller;
+	private EnemyController gb1WavController;
+	private EnemyController gb2Pul1Controller;
+	private EnemyController gb2Pul2AndWavController;
 
 	private GameObject kick;
 	private GameObject snare;
 	private GameObject hat;
 	private GameObject clap;
-	private GameObject gb1;
-	private GameObject gb2;
+	private GameObject glitch;
+	private GameObject gb1pul1;
+	private GameObject gb1pul2;
+	private GameObject gb1wav;
+	private GameObject gb2pul1;
+	private GameObject gb2pul2andwav;
 
 	public bool activeChecked = false;
 
@@ -42,15 +50,23 @@ public class SongScript : MonoBehaviour {
 		snare = GameObject.Find ("Snare");
 		hat = GameObject.Find ("Hat");
 		clap = GameObject.Find("Clap");
-		gb1 = GameObject.Find ("GB1");
-		gb2 = GameObject.Find ("GB2");
+		glitch = GameObject.Find ("AltPerc");
+		gb1pul1 = GameObject.Find ("GB1Pulse1");
+		gb1pul2 = GameObject.Find ("GB1Pulse2");
+		gb1wav = GameObject.Find ("GB1Wav");
+		gb2pul1 = GameObject.Find ("GB2Pulse1");
+		gb2pul2andwav = GameObject.Find("GB2PulseAndWav");
 
 		kickController = GameObject.Find ("Kick").GetComponent<EnemyController>();
 		snareController = GameObject.Find ("Snare").GetComponent<EnemyController>();
 		hatController = GameObject.Find ("Hat").GetComponent<EnemyController>();
 		clapController = GameObject.Find("Clap").GetComponent<EnemyController>();
-		gb1Controller = GameObject.Find ("GB1").GetComponent<EnemyController>();
-		gb2Controller = GameObject.Find ("GB2").GetComponent<EnemyController>();
+		glitchController = GameObject.Find ("AltPerc").GetComponent<EnemyController>();
+		gb1Pul1Controller = GameObject.Find ("GB1Pulse1").GetComponent<EnemyController>();
+		gb1Pul2Controller = GameObject.Find ("GB1Pulse2").GetComponent<EnemyController>();
+		gb1WavController = GameObject.Find ("GB1Wav").GetComponent<EnemyController>();
+		gb2Pul1Controller = GameObject.Find ("GB2Pulse1").GetComponent<EnemyController>();
+		gb2Pul2AndWavController = GameObject.Find ("GB2PulseAndWav").GetComponent<EnemyController>();
 
 		metronome = GameObject.Find ("AudioSource").GetComponent<MetronomeTimer>();
 		audioXFade = GameObject.Find ("AudioSource").GetComponent<AudioXFade>();
@@ -58,10 +74,10 @@ public class SongScript : MonoBehaviour {
 		theCamera = GameObject.Find ("Main Camera").GetComponent<Camera>();
 		cameraColor = theCamera.backgroundColor;
 
-		kickController.instrumentColor = new Color (1f, 1f, .5f);
-		snareController.instrumentColor = new Color(1f, .85f, .85f);
-		clapController.instrumentColor = new Color(.5f, .5f, 1f);
-		hatController.instrumentColor = new Color(.5f, 1f, .5f);
+		kickController.instrumentColor = new Color (.5f, .5f, .5f);
+		snareController.instrumentColor = new Color(.75f, .75f, .75f);
+		clapController.instrumentColor = new Color(.25f, .25f, .25f);
+		hatController.instrumentColor = new Color(.9f, .9f, .9f);
 
 	}
 	
@@ -88,6 +104,8 @@ public class SongScript : MonoBehaviour {
 
 	void FixedUpdate()
 	{
+
+
 		if (audioXFade.songSection == 0)
 		{
 			if (metronome.measure % 2 == 1)
@@ -97,7 +115,7 @@ public class SongScript : MonoBehaviour {
 					switch(metronome.sixteenthNote)
 					{
 					case 0:
-						kickController.LaunchEnemy(1, 3);
+						kickController.LaunchEnemy(4, 3);
 						break;
 					case 1:
 						hatController.LaunchEnemy(2, 2);
@@ -109,7 +127,7 @@ public class SongScript : MonoBehaviour {
 						hatController.LaunchEnemy(2, 2);
 						break;
 					case 5:
-						kickController.LaunchEnemy(1, 3);
+						kickController.LaunchEnemy(4, 3);
 						break;
 					case 8:
 						snareController.LaunchEnemy(1, 5);
@@ -120,6 +138,71 @@ public class SongScript : MonoBehaviour {
 					case 11:
 						hatController.LaunchEnemy(2, 2);
 						break;
+					}
+				}
+			}
+			else if (metronome.measure % 2 == 0)
+			{
+				if (metronome.onSixteenth == true)
+				{
+					switch(metronome.sixteenthNote)
+					{
+					case 2:
+						hatController.LaunchEnemy(2, 2);
+						break;
+					case 3:
+						hatController.LaunchEnemy(2, 2);
+						break;
+					case 4:
+						hatController.LaunchEnemy(2, 2);
+						break;
+					case 5:
+						hatController.LaunchEnemy(2, 2);
+						break;
+					case 8:
+						snareController.LaunchEnemy(1, 5);
+						break;
+					case 9:
+						hatController.LaunchEnemy(2, 2);
+						break;
+					case 10:
+						hatController.LaunchEnemy(2, 2);
+						break;
+					case 11:
+						hatController.LaunchEnemy(2, 2);
+						break;
+					}
+					if (metronome.measure == 4 || metronome.measure == 8 || metronome.measure == 12 || metronome.measure == 16)
+					{
+						switch(metronome.sixteenthNote)
+						{
+						case 2:
+							hatController.LaunchEnemy(2, 2);
+							break;
+						case 3:
+							hatController.LaunchEnemy(2, 2);
+							break;
+						case 4:
+							hatController.LaunchEnemy(2, 2);
+							break;
+						case 5:
+							hatController.LaunchEnemy(2, 2);
+							break;
+						case 8:
+							snareController.LaunchEnemy(1, 5);
+							clapController.LaunchEnemy(1, 5);
+							break;
+						case 9:
+							hatController.LaunchEnemy(2, 2);
+							break;
+						case 10:
+							kickController.LaunchEnemy(4, 3);
+							hatController.LaunchEnemy(2, 2);
+							break;
+						case 11:
+							hatController.LaunchEnemy(2, 2);
+							break;
+						}
 					}
 				}
 			}
