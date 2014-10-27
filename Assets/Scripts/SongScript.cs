@@ -2704,7 +2704,7 @@ public class SongScript : MonoBehaviour {
 			clapController.colorWorks = true;
 			gb1Pul1Controller.colorWorks = true;
 			gb2Pul1Controller.colorWorks = true;
-			gb1Pul1Controller.instrumentColor = new Color(1f, .5f, .5f);
+			gb1Pul1Controller.instrumentColor = new Color(1f, .4f, .4f);
 			clapController.instrumentColor = new Color(.4f, .4f, .4f);
 			gb2Pul1Controller.instrumentColor = new Color(.5f, .5f, 1f);
 			gb2Pul1Active = true;
@@ -2720,7 +2720,7 @@ public class SongScript : MonoBehaviour {
 			clapController.colorWorks = true;
 			gb1Pul1Controller.colorWorks = true;
 			gb2Pul1Controller.colorWorks = true;
-			gb1Pul1Controller.instrumentColor = new Color(1f, .5f, .5f);
+			gb1Pul1Controller.instrumentColor = new Color(1f, .4f, .4f);
 			clapController.instrumentColor = new Color(.4f, .4f, .4f);
 			gb2Pul1Controller.instrumentColor = new Color(.5f, .5f, 1f);
 			gb2Pul2AndWavActive = true;
@@ -2747,7 +2747,7 @@ public class SongScript : MonoBehaviour {
 			gb2Pul1Controller.colorWorks = false;
 			clapController.colorWorks = false;
 			gb1Pul1Controller.colorWorks = true;
-			gb1Pul1Controller.instrumentColor = new Color(1f, .5f, .5f);
+			gb1Pul1Controller.instrumentColor = new Color(1f, .4f, .4f);
 			if (activeChecked == false)
 			{
 				ActiveCheck();
@@ -2760,23 +2760,7 @@ public class SongScript : MonoBehaviour {
 			hatActive = true;
 			snareActive = true;
 			gb2Pul1Controller.colorWorks = true;
-
-			if (metronome.sixteenthNote == 0)
-			{
-				gb2Pul1Controller.instrumentColor = new Color(.85f, .85f, 1f);
-			}
-			else if (metronome.sixteenthNote == 1)
-			{
-				gb2Pul1Controller.instrumentColor = new Color(.65f, .65f, 1f);
-			}
-			else if (metronome.sixteenthNote == 2)
-			{
-				gb2Pul1Controller.instrumentColor = new Color(.45f, .45f, 1f);
-			}
-			else if (metronome.sixteenthNote == 3)
-			{
-				gb2Pul1Controller.instrumentColor = new Color(.25f, .25f, 1f);
-			}
+			gb2Pul1Controller.instrumentColor = new Color(.5f,.5f, 1f);
 			if (activeChecked == false)
 			{
 				ActiveCheck();
@@ -2800,24 +2784,8 @@ public class SongScript : MonoBehaviour {
 			gb1Pul1Controller.colorWorks = true;
 			clapController.colorWorks = true;
 			clapController.instrumentColor = new Color(.4f, .4f, .4f);
-			gb1Pul1Controller.instrumentColor = new Color(1f, .5f, .1f);
-			
-			if (metronome.sixteenthNote == 0)
-			{
-				gb2Pul1Controller.instrumentColor = new Color(.85f, .85f, 1f);
-			}
-			else if (metronome.sixteenthNote == 1)
-			{
-				gb2Pul1Controller.instrumentColor = new Color(.65f, .65f, 1f);
-			}
-			else if (metronome.sixteenthNote == 2)
-			{
-				gb2Pul1Controller.instrumentColor = new Color(.45f, .45f, 1f);
-			}
-			else if (metronome.sixteenthNote == 3)
-			{
-				gb2Pul1Controller.instrumentColor = new Color(.25f, .25f, 1f);
-			}
+			gb1Pul1Controller.instrumentColor = new Color(1f, .4f, .4f);
+			gb2Pul1Controller.instrumentColor = new Color(.5f, .5f, 1f);
 
 			cameraSize = 20f;
 			if (activeChecked == false)
@@ -2826,29 +2794,6 @@ public class SongScript : MonoBehaviour {
 			}
 			SongSectionEight ();
 		}
-
-
-
-		/*
-		if (audioXFade.songSection == 0)
-		{
-			hatActive = true;
-			gb1WavActive = true;
-			glitchActive = true;
-			gb1Pul2Active = true;
-			gb1Pul1Active = true;
-			snareActive = true;
-			kickActive = true;
-			clapActive = true;
-			gb2Pul1Active = true;
-			gb2Pul2AndWavActive = true;
-			cameraSize = 20f;
-			if (activeChecked == false)
-			{
-				ActiveCheck();
-			}
-			SongSectionEight ();
-		}*/
 	}
 
 

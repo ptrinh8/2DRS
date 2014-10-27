@@ -524,6 +524,10 @@ public class VolumeControl : MonoBehaviour {
 				kickLowestVolume = 1f - (kickHealth * .01f);
 			}
 		}
+		else if (kickController.killedOnce == true)
+		{
+			kickLowestVolume = 1f;
+		}
 
 		if (clapController.gameObject.activeInHierarchy == true && clapController.killedOnce == false)
 		{
@@ -535,6 +539,10 @@ public class VolumeControl : MonoBehaviour {
 			{
 				clapLowestVolume = 1f - (clapHealth * .01f);
 			}
+		}
+		else if (clapController.killedOnce == true)
+		{
+			clapLowestVolume = 1f;
 		}
 
 		if (hatController.gameObject.activeInHierarchy == true && hatController.killedOnce == false)
@@ -548,6 +556,10 @@ public class VolumeControl : MonoBehaviour {
 				hatLowestVolume = 1f - (hatHealth * .01f);
 			}
 		}
+		else if (hatController.killedOnce == true)
+		{
+			hatLowestVolume = 1f;
+		}
 
 		if (snareController.gameObject.activeInHierarchy == true && snareController.killedOnce == false)
 		{
@@ -559,6 +571,10 @@ public class VolumeControl : MonoBehaviour {
 			{
 				snareLowestVolume = 1f - (snareHealth * .01f);
 			}
+		}
+		else if (snareController.killedOnce == true)
+		{
+			snareLowestVolume = 1f;
 		}
 
 		if (glitchController.gameObject.activeInHierarchy == true && glitchController.killedOnce == false)
@@ -572,6 +588,10 @@ public class VolumeControl : MonoBehaviour {
 				glitchLowestVolume = 1f - (glitchHealth * .01f);
 			}
 		}
+		else if (glitchController.killedOnce == true)
+		{
+			glitchLowestVolume = 1f;
+		}
 
 		if (gb1Pul1Controller.gameObject.activeInHierarchy == true && gb1Pul1Controller.killedOnce == false)
 		{
@@ -583,6 +603,10 @@ public class VolumeControl : MonoBehaviour {
 			{
 				gb1Pul1LowestVolume = 1f - (gb1Pul1Health * .01f);
 			}
+		}
+		else if (gb1Pul1Controller.killedOnce == true)
+		{
+			gb1Pul1LowestVolume = 1f;
 		}
 
 		if (gb1Pul2Controller.gameObject.activeInHierarchy == true && gb1Pul2Controller.killedOnce == false)
@@ -596,6 +620,10 @@ public class VolumeControl : MonoBehaviour {
 				gb1Pul2LowestVolume = 1f - (gb1Pul2Health * .01f);
 			}
 		}
+		else if (gb1Pul2Controller.killedOnce == true)
+		{
+			gb1Pul2LowestVolume = 1f;
+		}
 
 		if (gb1WavController.gameObject.activeInHierarchy == true && gb1WavController.killedOnce == false)
 		{
@@ -607,6 +635,10 @@ public class VolumeControl : MonoBehaviour {
 			{
 				gb1WavLowestVolume = 1f - (gb1WavHealth * .01f);
 			}
+		}
+		else if (gb1WavController.killedOnce == true)
+		{
+			gb1WavLowestVolume = 1f;
 		}
 
 		if (gb2Pul1Controller.gameObject.activeInHierarchy == true && gb2Pul1Controller.killedOnce == false)
@@ -620,6 +652,10 @@ public class VolumeControl : MonoBehaviour {
 				gb2Pul1LowestVolume = 1f - (gb2Pul1Health * .01f);
 			}
 		}
+		else if (gb2Pul1Controller.killedOnce == true)
+		{
+			gb2Pul1LowestVolume = 1f;
+		}
 			
 		if (gb2Pul2AndWavController.gameObject.activeInHierarchy == true && gb2Pul2AndWavController.killedOnce == false)
 		{
@@ -631,6 +667,10 @@ public class VolumeControl : MonoBehaviour {
 			{
 				gb2Pul2AndWavLowestVolume = 1f - (gb2Pul2AndWavHealth * .01f);
 			}
+		}
+		else if (gb2Pul2AndWavController.killedOnce == true)
+		{
+			gb2Pul2AndWavLowestVolume = 1f;
 		}
 	}
 

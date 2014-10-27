@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour {
 
 	private float boostTimer;
 	private float boostTime;
-	private float boostRechargeTime = 3f;
+	private float boostRechargeTime = 1.5f;
 	public float boostRechargeTimer;
 	private Vector3 boostDirection = Vector3.zero;
 
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour {
 
 	public float respawnTime = 3f;
 
-	private bool boosting = false;
+	public bool boosting = false;
 	public bool canBoost = true;
 
 	public bool alive = true;
@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour {
 			gamePad = true;
 		}
 
-		boostTime = .75f;
+		boostTime = .5f;
 		respawnTime = 3f;
 	}
 	
@@ -215,7 +215,7 @@ public class PlayerController : MonoBehaviour {
 			respawnTimer += Time.deltaTime;
 			if (respawnTimer >= respawnTime)
 			{
-				transform.position = respawnPosition;
+				respawnPosition = transform.position;
 				RespawnPlayer();
 			}
 		}

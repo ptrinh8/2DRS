@@ -57,7 +57,7 @@ public class EnemyStraightScript : MonoBehaviour {
 
 			if (collision.gameObject.name == "Player")
 			{
-				if (playerController.alive == true)
+				if (playerController.alive == true && playerController.boosting == false)
 				{
 					EmitParticles();
 					playerController.health--;

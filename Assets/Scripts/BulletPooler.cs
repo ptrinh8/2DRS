@@ -6,7 +6,7 @@ public class BulletPooler : MonoBehaviour {
 	
 	public static BulletPooler current;
 	public GameObject pooledObject;
-	public int pooledAmount = 20;
+	public int pooledAmount = 60;
 	public bool willGrow = true;
 
 	public List<GameObject> pooledObjects;

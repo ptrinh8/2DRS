@@ -296,6 +296,7 @@ public class AudioXFade : MonoBehaviour {
 			}
 			else
 			{
+				/*
 				offset = loopArray[songSection].clip.length - loopArray[songSection].time;
 				//offset = (AudioSettings.dspTime + (double)loopArray[songSection].clip.length) - (AudioSettings.dspTime + (double)loopArray[songSection].time) + AudioSettings.dspTime;
 				//dspOffset = AudioSettings.dspTime + offset;
@@ -329,6 +330,41 @@ public class AudioXFade : MonoBehaviour {
 				gb1NoiseArray[songSection].volume = 1f;
 				gb1NoiseArray[songSection + 1].volume = 1f;
 
+				clipTriggered = true;
+				//songScript.activeChecked = false;
+				*/
+
+				dspOffset = loopArray[songSection].clip.length - loopArray[songSection].time + AudioSettings.dspTime;
+				loopArray[songSection + 1].PlayScheduled(dspOffset);
+				loopArray[songSection].loop = false;
+				
+				kickArray[songSection + 1].PlayScheduled(dspOffset);
+				hatArray[songSection + 1].PlayScheduled(dspOffset);
+				snareArray[songSection + 1].PlayScheduled(dspOffset);
+				clapArray[songSection + 1].PlayScheduled(dspOffset);
+				glitchArray[songSection + 1].PlayScheduled(dspOffset);
+				gb1Pul1Array[songSection + 1].PlayScheduled(dspOffset);
+				gb1Pul2Array[songSection + 1].PlayScheduled(dspOffset);
+				gb1WavArray[songSection + 1].PlayScheduled(dspOffset);
+				gb2Pul1Array[songSection + 1].PlayScheduled(dspOffset);
+				gb2Pul2AndWavArray[songSection + 1].PlayScheduled(dspOffset);
+				gb1NoiseArray[songSection + 1].PlayScheduled(dspOffset);
+				
+				kickArray[songSection].loop = false;
+				hatArray[songSection].loop = false;
+				snareArray[songSection].loop = false;
+				clapArray[songSection].loop = false;
+				glitchArray[songSection].loop = false;
+				gb1Pul1Array[songSection].loop = false;
+				gb1Pul2Array[songSection].loop = false;
+				gb1WavArray[songSection].loop = false;
+				gb2Pul1Array[songSection].loop = false;
+				gb2Pul2AndWavArray[songSection].loop = false;
+				gb1NoiseArray[songSection].loop = false;
+				
+				gb1NoiseArray[songSection].volume = 1f;
+				gb1NoiseArray[songSection + 1].volume = 1f;
+				
 				clipTriggered = true;
 				//songScript.activeChecked = false;
 

@@ -70,9 +70,12 @@ public class EnemyDumbScript : MonoBehaviour {
 
 			if (collision.gameObject.name == "Player")
 			{
-				EmitParticles();
-				playerController.health--;
-				gameObject.SetActive(false);
+				if (playerController.alive == true && playerController.boosting == false)
+				{
+					EmitParticles();
+					playerController.health--;
+					gameObject.SetActive(false);
+				}
 			}
 		}
 	}
