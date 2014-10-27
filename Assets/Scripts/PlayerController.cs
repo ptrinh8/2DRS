@@ -36,7 +36,9 @@ public class PlayerController : MonoBehaviour {
 
 	public bool alive = true;
 	public float respawnTimer;
-	private Vector2 respawnPosition;
+	public Vector2 respawnPosition;
+
+	private ParticleSystem particleSystem;
 	//Components
 	//private CharacterController controller;
 
@@ -58,6 +60,8 @@ public class PlayerController : MonoBehaviour {
 
 		boostTime = .5f;
 		respawnTime = 3f;
+
+		particleSystem = this.GetComponent<ParticleSystem>();
 	}
 	
 	void Update () {
@@ -69,13 +73,18 @@ public class PlayerController : MonoBehaviour {
 
 		if (alive == true)
 		{
+			if (particleSystem.isPlaying == true)
+			{
+				particleSystem.Stop ();
+			}
+
 			if (gamePad) 
 			{
 				moveDirection = new Vector3(Input.GetAxis("GamepadMoveHorizontal"), (-1 * Input.GetAxis("GamepadMoveVertical")), 0);
 
 				deltaX = Input.GetAxis("GamepadAimHorizontal");
 				deltaY = Input.GetAxis("GamepadAimVertical");
-				direction = new Vector3(deltaX, deltaY, 0);
+				direction = new Vector3(-deltaX, -deltaY, 0);
 
 				boostRechargeTimer += Time.deltaTime;
 				float angle = Mathf.Atan2(deltaY,deltaX) * 180/Mathf.PI + 90;
@@ -211,11 +220,13 @@ public class PlayerController : MonoBehaviour {
 		}
 		else if (alive == false)
 		{
+			particleSystem.Play();
 			this.GetComponent<SpriteRenderer>().enabled = false;
+			rigidbody2D.velocity = new Vector2(0, 0);
 			respawnTimer += Time.deltaTime;
+			respawnPosition = transform.position;
 			if (respawnTimer >= respawnTime)
 			{
-				respawnPosition = transform.position;
 				RespawnPlayer();
 			}
 		}

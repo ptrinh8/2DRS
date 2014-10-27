@@ -239,7 +239,6 @@ public class AudioXFade : MonoBehaviour {
 	
 	void FixedUpdate()
 	{
-		Debug.Log (gb1NoiseArray[songSection].isPlaying);
 		if (player.gameObject.activeInHierarchy)
 		{
 			spawnsKilled = GameObject.Find ("Player").GetComponent<PlayerController>().spawnsKilled;

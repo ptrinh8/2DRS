@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class SongScript : MonoBehaviour {
@@ -2688,8 +2688,10 @@ public class SongScript : MonoBehaviour {
 			snareController.colorWorks = false;
 			clapController.colorWorks = true;
 			gb1Pul1Controller.colorWorks = true;
+			kickController.colorWorks = true;
 			gb1Pul1Controller.instrumentColor = new Color(1f, .5f, .5f);
 			clapController.instrumentColor = new Color(.4f, .4f, .4f);
+			kickController.instrumentColor = new Color(.6f, .6f, .6f);
 			kickActive = true;
 			clapActive = true;
 			cameraSize = 15f;
@@ -2803,8 +2805,13 @@ public class SongScript : MonoBehaviour {
 		{
 			if (kick.gameObject.activeInHierarchy == false)
 			{
-				kick.SetActive(true);
-				kickController.health = 100;
+				kick.gameObject.SetActive(true);
+			}
+			else if (kickController.alive == false)
+			{
+				kickController.controllerColor = new Color(0f, 0f, 0f);
+				kickController.health = 50;
+				kickController.alive = true;
 			}
 		}
 
@@ -2812,8 +2819,13 @@ public class SongScript : MonoBehaviour {
 		{
 			if (hat.gameObject.activeInHierarchy == false)
 			{
-				hat.SetActive(true);
-				hatController.health = 100;
+				hat.gameObject.SetActive(true);
+			}
+			else if (hatController.alive == false)
+			{
+				hatController.controllerColor = new Color(0f, 0f, 0f);
+				hatController.health = 50;
+				hatController.alive = true;
 			}
 		}
 
@@ -2821,8 +2833,13 @@ public class SongScript : MonoBehaviour {
 		{
 			if (clap.gameObject.activeInHierarchy == false)
 			{
-				clap.SetActive(true);
-				clapController.health = 100;
+				clap.gameObject.SetActive(true);
+			}
+			else if (clapController.alive == false)
+			{
+				clapController.controllerColor = new Color(0f, 0f, 0f);
+				clapController.health = 50;
+				clapController.alive = true;
 			}
 		}
 
@@ -2830,8 +2847,13 @@ public class SongScript : MonoBehaviour {
 		{
 			if (snare.gameObject.activeInHierarchy == false)
 			{
-				snare.SetActive(true);
-				snareController.health = 100;
+				snare.gameObject.SetActive(true);
+			}
+			else if (snareController.alive == false)
+			{
+				snareController.controllerColor = new Color(0f, 0f, 0f);
+				snareController.health = 50;
+				snareController.alive = true;
 			}
 		}
 
@@ -2839,8 +2861,13 @@ public class SongScript : MonoBehaviour {
 		{
 			if (glitch.gameObject.activeInHierarchy == false)
 			{
-				glitch.SetActive(true);
-				glitchController.health = 100;
+				glitch.gameObject.SetActive(true);
+			}
+			else if (glitchController.alive == false)
+			{
+				glitchController.controllerColor = new Color(0f, 0f, 0f);
+				glitchController.health = 50;
+				glitchController.alive = true;
 			}
 		}
 
@@ -2848,8 +2875,13 @@ public class SongScript : MonoBehaviour {
 		{
 			if (gb1pul1.gameObject.activeInHierarchy == false)
 			{
-				gb1pul1.SetActive(true);
-				gb1Pul1Controller.health = 100;
+				gb1pul1.gameObject.SetActive(true);
+			}
+			else if (gb1Pul1Controller.alive == false)
+			{
+				gb1Pul1Controller.controllerColor = new Color(0f, 0f, 0f);
+				gb1Pul1Controller.health = 50;
+				gb1Pul1Controller.alive = true;
 			}
 		}
 
@@ -2857,8 +2889,13 @@ public class SongScript : MonoBehaviour {
 		{
 			if (gb1pul2.gameObject.activeInHierarchy == false)
 			{
-				gb1pul2.SetActive(true);
-				gb1Pul2Controller.health = 100;
+				gb1pul2.gameObject.SetActive(true);
+			}
+			else if (gb1Pul2Controller.alive == false)
+			{
+				gb1Pul2Controller.controllerColor = new Color(0f, 0f, 0f);
+				gb1Pul2Controller.health = 50;
+				gb1Pul2Controller.alive = true;
 			}
 		}
 
@@ -2866,8 +2903,13 @@ public class SongScript : MonoBehaviour {
 		{
 			if (gb1wav.gameObject.activeInHierarchy == false)
 			{
-				gb1wav.SetActive(true);
-				gb1WavController.health = 100;
+				gb1wav.gameObject.SetActive(true);
+			}
+			else if (gb1WavController.alive == false)
+			{
+				gb1WavController.controllerColor = new Color(0f, 0f, 0f);
+				gb1WavController.health = 50;
+				gb1WavController.alive = true;
 			}
 		}
 
@@ -2875,8 +2917,13 @@ public class SongScript : MonoBehaviour {
 		{
 			if (gb2pul1.gameObject.activeInHierarchy == false)
 			{
-				gb2pul1.SetActive(true);
-				gb2Pul1Controller.health = 100;
+				gb2pul1.gameObject.SetActive(true);
+			}
+			else if (gb2Pul1Controller.alive == false)
+			{
+				gb2Pul1Controller.controllerColor = new Color(0f, 0f, 0f);
+				gb2Pul1Controller.health = 50;
+				gb2Pul1Controller.alive = true;
 			}
 		}
 
@@ -2884,8 +2931,13 @@ public class SongScript : MonoBehaviour {
 		{
 			if (gb2pul2andwav.gameObject.activeInHierarchy == false)
 			{
-				gb2pul2andwav.SetActive(true);
-				gb2Pul2AndWavController.health = 100;
+				gb2pul2andwav.gameObject.SetActive(true);
+			}
+			else if (gb2Pul2AndWavController.alive == false)
+			{
+				gb2Pul2AndWavController.controllerColor = new Color(0f, 0f, 0f);
+				gb2Pul2AndWavController.health = 50;
+				gb2Pul2AndWavController.alive = true;
 			}
 		}
 

@@ -174,7 +174,7 @@ public class VolumeControl : MonoBehaviour {
 		kicktheaudio = kickAudio;
 
 
-		if (kickDistance < 4)
+		if (kickDistance < 6)
 		{
 			if (kickAudio < .5 && kickLowestVolume < .5)
 			{
@@ -198,7 +198,7 @@ public class VolumeControl : MonoBehaviour {
 			}
 		}
 
-		if (hatDistance < 4)
+		if (hatDistance < 6)
 		{
 			if (hatAudio < .5 && hatLowestVolume < .5)
 			{
@@ -222,7 +222,7 @@ public class VolumeControl : MonoBehaviour {
 			}
 		}
 
-		if (clapDistance < 4)
+		if (clapDistance < 6)
 		{
 			if (clapAudio < .5 && clapLowestVolume < .5)
 			{
@@ -246,7 +246,7 @@ public class VolumeControl : MonoBehaviour {
 			}
 		}
 
-		if (snareDistance < 4)
+		if (snareDistance < 6)
 		{
 			if (snareAudio < .5 && snareLowestVolume < .5)
 			{
@@ -270,7 +270,7 @@ public class VolumeControl : MonoBehaviour {
 			}
 		}
 
-		if (glitchDistance < 4)
+		if (glitchDistance < 6)
 		{
 			if (glitchAudio < .5 && glitchLowestVolume < .5)
 			{
@@ -294,7 +294,7 @@ public class VolumeControl : MonoBehaviour {
 			}
 		}
 
-		if (gb1Pul1Distance < 4)
+		if (gb1Pul1Distance < 6)
 		{
 			if (gb1Pul1Audio < .5 && gb1Pul1LowestVolume < .5)
 			{
@@ -318,7 +318,7 @@ public class VolumeControl : MonoBehaviour {
 			}
 		}
 
-		if (gb1Pul2Distance < 4)
+		if (gb1Pul2Distance < 6)
 		{
 			if (gb1Pul2Audio < .5 && gb1Pul2LowestVolume < .5)
 			{
@@ -342,7 +342,7 @@ public class VolumeControl : MonoBehaviour {
 			}
 		}
 
-		if (gb1WavDistance < 4)
+		if (gb1WavDistance < 6)
 		{
 			if (gb1WavAudio < .5 && gb1WavLowestVolume < .5)
 			{
@@ -366,7 +366,7 @@ public class VolumeControl : MonoBehaviour {
 			}
 		}
 
-		if (gb2Pul1Distance < 4)
+		if (gb2Pul1Distance < 6)
 		{
 			if (gb2Pul1Audio < .5 && gb2Pul1LowestVolume < .5)
 			{
@@ -390,7 +390,7 @@ public class VolumeControl : MonoBehaviour {
 			}
 		}
 
-		if (gb2Pul2AndWavDistance < 4)
+		if (gb2Pul2AndWavDistance < 6)
 		{
 			if (gb2Pul2AndWavAudio < .5 && gb2Pul2AndWavLowestVolume < .5)
 			{
@@ -515,13 +515,13 @@ public class VolumeControl : MonoBehaviour {
 	{
 		if (kickController.gameObject.activeInHierarchy == true && kickController.killedOnce == false)
 		{
-			if (kickHealth == 100)
+			if (kickHealth == 50)
 			{
 				kickLowestVolume = 0f;
 			}
 			else
 			{
-				kickLowestVolume = 1f - (kickHealth * .01f);
+				kickLowestVolume = 1f - (kickHealth * .02f);
 			}
 		}
 		else if (kickController.killedOnce == true)
@@ -531,13 +531,13 @@ public class VolumeControl : MonoBehaviour {
 
 		if (clapController.gameObject.activeInHierarchy == true && clapController.killedOnce == false)
 		{
-			if (clapHealth == 100)
+			if (clapHealth == 50)
 			{
 				clapLowestVolume = 0f;
 			}
 			else
 			{
-				clapLowestVolume = 1f - (clapHealth * .01f);
+				clapLowestVolume = 1f - (clapHealth * .02f);
 			}
 		}
 		else if (clapController.killedOnce == true)
@@ -547,13 +547,13 @@ public class VolumeControl : MonoBehaviour {
 
 		if (hatController.gameObject.activeInHierarchy == true && hatController.killedOnce == false)
 		{
-			if (hatLowestVolume == 100)
+			if (hatLowestVolume == 50)
 			{
 				hatLowestVolume = 0f;
 			}
 			else
 			{
-				hatLowestVolume = 1f - (hatHealth * .01f);
+				hatLowestVolume = 1f - (hatHealth * .02f);
 			}
 		}
 		else if (hatController.killedOnce == true)
@@ -563,13 +563,13 @@ public class VolumeControl : MonoBehaviour {
 
 		if (snareController.gameObject.activeInHierarchy == true && snareController.killedOnce == false)
 		{
-			if (snareLowestVolume == 100)
+			if (snareLowestVolume == 50)
 			{
 				snareLowestVolume = 0f;
 			}
 			else
 			{
-				snareLowestVolume = 1f - (snareHealth * .01f);
+				snareLowestVolume = 1f - (snareHealth * .02f);
 			}
 		}
 		else if (snareController.killedOnce == true)
@@ -579,13 +579,13 @@ public class VolumeControl : MonoBehaviour {
 
 		if (glitchController.gameObject.activeInHierarchy == true && glitchController.killedOnce == false)
 		{
-			if (glitchLowestVolume == 100)
+			if (glitchLowestVolume == 50)
 			{
 				glitchLowestVolume = 0f;
 			}
 			else
 			{
-				glitchLowestVolume = 1f - (glitchHealth * .01f);
+				glitchLowestVolume = 1f - (glitchHealth * .02f);
 			}
 		}
 		else if (glitchController.killedOnce == true)
@@ -595,13 +595,13 @@ public class VolumeControl : MonoBehaviour {
 
 		if (gb1Pul1Controller.gameObject.activeInHierarchy == true && gb1Pul1Controller.killedOnce == false)
 		{
-			if (gb1Pul1LowestVolume == 100)
+			if (gb1Pul1LowestVolume == 50)
 			{
 				gb1Pul1LowestVolume = 0f;
 			}
 			else
 			{
-				gb1Pul1LowestVolume = 1f - (gb1Pul1Health * .01f);
+				gb1Pul1LowestVolume = 1f - (gb1Pul1Health * .02f);
 			}
 		}
 		else if (gb1Pul1Controller.killedOnce == true)
@@ -611,13 +611,13 @@ public class VolumeControl : MonoBehaviour {
 
 		if (gb1Pul2Controller.gameObject.activeInHierarchy == true && gb1Pul2Controller.killedOnce == false)
 		{
-			if (gb1Pul2LowestVolume == 100)
+			if (gb1Pul2LowestVolume == 50)
 			{
 				gb1Pul2LowestVolume = 0f;
 			}
 			else
 			{
-				gb1Pul2LowestVolume = 1f - (gb1Pul2Health * .01f);
+				gb1Pul2LowestVolume = 1f - (gb1Pul2Health * .02f);
 			}
 		}
 		else if (gb1Pul2Controller.killedOnce == true)
@@ -627,13 +627,13 @@ public class VolumeControl : MonoBehaviour {
 
 		if (gb1WavController.gameObject.activeInHierarchy == true && gb1WavController.killedOnce == false)
 		{
-			if (gb1WavLowestVolume == 100)
+			if (gb1WavLowestVolume == 50)
 			{
 				gb1WavLowestVolume = 0f;
 			}
 			else
 			{
-				gb1WavLowestVolume = 1f - (gb1WavHealth * .01f);
+				gb1WavLowestVolume = 1f - (gb1WavHealth * .02f);
 			}
 		}
 		else if (gb1WavController.killedOnce == true)
@@ -643,13 +643,13 @@ public class VolumeControl : MonoBehaviour {
 
 		if (gb2Pul1Controller.gameObject.activeInHierarchy == true && gb2Pul1Controller.killedOnce == false)
 		{
-			if (gb2Pul1LowestVolume == 100)
+			if (gb2Pul1LowestVolume == 50)
 			{
 				gb2Pul1LowestVolume = 0f;
 			}
 			else
 			{
-				gb2Pul1LowestVolume = 1f - (gb2Pul1Health * .01f);
+				gb2Pul1LowestVolume = 1f - (gb2Pul1Health * .02f);
 			}
 		}
 		else if (gb2Pul1Controller.killedOnce == true)
@@ -659,13 +659,13 @@ public class VolumeControl : MonoBehaviour {
 			
 		if (gb2Pul2AndWavController.gameObject.activeInHierarchy == true && gb2Pul2AndWavController.killedOnce == false)
 		{
-			if (gb2Pul2AndWavLowestVolume == 100)
+			if (gb2Pul2AndWavLowestVolume == 50)
 			{
 				gb2Pul2AndWavLowestVolume = 0f;
 			}
 			else
 			{
-				gb2Pul2AndWavLowestVolume = 1f - (gb2Pul2AndWavHealth * .01f);
+				gb2Pul2AndWavLowestVolume = 1f - (gb2Pul2AndWavHealth * .02f);
 			}
 		}
 		else if (gb2Pul2AndWavController.killedOnce == true)

@@ -17,9 +17,13 @@ public class EnemyController : MonoBehaviour {
 	public Color instrumentColor;
 	private Camera theCamera;
 
+	public Color controllerColor;
+
 	public bool killedOnce = false;
 
 	public bool colorWorks = false;
+
+	public bool alive = true;
 
 	private SongScript songScript;
 
@@ -30,21 +34,31 @@ public class EnemyController : MonoBehaviour {
 		metronome = GameObject.Find ("AudioSource").GetComponent<MetronomeTimer>();
 		scale = this.transform.localScale;
 		position = this.transform.position;
-		health = 100;
+		health = 50;
 		enemyHeading = 0;
 		theCamera = GameObject.Find ("Main Camera").GetComponent<Camera>();
 		songScript = GameObject.Find ("SongScript").GetComponent<SongScript>();
+		this.sprite.color = new Color(0f, 0f, 0f);
+		controllerColor = this.sprite.color;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
 		//InvokeRepeating("LaunchEnemy", 3f, 3f);
-		if (health <= 0)
+		controllerColor.r = 1 - (health * .02f);
+		controllerColor.g = 1 - (health * .02f);
+		controllerColor.b = 1 - (health * .02f);
+
+		if (health <= 0 && alive == true)
 		{
 			player.spawnsKilled++;
+			controllerColor.r = 1;
+			controllerColor.g = 1;
+			controllerColor.b = 1;
 			killedOnce = true;
-			this.gameObject.SetActive(false);
+			alive = false;
+			//this.gameObject.SetActive(false);
 		}
 
 		if (this.transform.localScale.x >= 1f)
@@ -52,6 +66,8 @@ public class EnemyController : MonoBehaviour {
 			this.transform.localScale -= new Vector3(.02f, .02f, 0f);
 		}
 	
+		this.sprite.color = controllerColor;
+
 	}
 
 	void FixedUpdate()
@@ -75,7 +91,7 @@ public class EnemyController : MonoBehaviour {
 
 	public void LaunchEnemy(int enemyType, int numberOfEnemies)
 	{
-		if (this.gameObject.activeInHierarchy)
+		if (alive == true)
 		{
 			if (enemyType == 1)
 			{
@@ -167,19 +183,46 @@ public class EnemyController : MonoBehaviour {
 		}
 		else
 		{
+			if (colorWorks == true)
+			{
+				theCamera.backgroundColor = instrumentColor;
+				songScript.cameraColor = instrumentColor;
+			}
+			this.transform.localScale = new Vector3(3f, 3f, 1f);
 			return;
 		}
-
+		this.transform.localScale = new Vector3(3f, 3f, 1f);
 		position = this.transform.position;
 
+	}
+
+	void EmitParticles(Vector2 particlePosition)
+	{
+		GameObject obj = ParticleSystemPooler.current.GetPooledObject();
+		
+		if (obj == null)
+		{
+			return;
+		}
+		
+		if (obj.gameObject.name == "ParticleSystem(Clone)")
+		{
+			obj.transform.position = particlePosition;
+			obj.SetActive(true);
+			obj.particleSystem.Play();
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.gameObject.name == "Bullet(Clone)")
 		{
-			collision.gameObject.SetActive(false);
-			health--;
+			if (alive == true)
+			{
+				collision.gameObject.SetActive(false);
+				EmitParticles(collision.transform.position);
+				health--;
+			}
 		}
 	}
 }
