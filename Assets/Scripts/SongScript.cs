@@ -55,8 +55,7 @@ public class SongScript : MonoBehaviour {
 	private float cameraSize = 8f;
 	public Color cameraColor;
 
-	private float respawnTimer;
-	private Vector2 respawnPosition;
+
 
 	private PlayerController player;
 	
@@ -2828,15 +2827,7 @@ public class SongScript : MonoBehaviour {
 			SongSectionEight ();
 		}
 
-		if (player.health <= 0)
-		{
-			respawnTimer += Time.deltaTime;
-			if (respawnTimer >= player.respawnTime)
-			{
-				player.transform.position = respawnPosition;
-				RespawnPlayer();
-			}
-		}
+
 
 		/*
 		if (audioXFade.songSection == 0)
@@ -2860,13 +2851,6 @@ public class SongScript : MonoBehaviour {
 		}*/
 	}
 
-	void RespawnPlayer()
-	{
-		player.health = 3;
-		player.transform.position = respawnPosition;
-		player.gameObject.SetActive(true);
-		respawnTimer = 0f;
-	}
 
 	void ActiveCheck()
 	{

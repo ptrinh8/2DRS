@@ -101,7 +101,7 @@ public class EnemyAvoidScript : MonoBehaviour {
 			}
 		}
 
-		if (playerController.gameObject.activeInHierarchy == false)
+		if (playerController.alive == false)
 		{
 			this.gameObject.SetActive(false);
 		}
@@ -123,9 +123,12 @@ public class EnemyAvoidScript : MonoBehaviour {
 			
 			if (collision.gameObject.name == "Player")
 			{
-				EmitParticles();
-				playerController.health--;
-				gameObject.SetActive(false);
+				if (playerController.alive == true)
+				{
+					EmitParticles();
+					playerController.health--;
+					gameObject.SetActive(false);
+				}
 			}
 		}
 	}

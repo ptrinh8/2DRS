@@ -26,7 +26,10 @@ public class EnemyFollowScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-
+		if (playerController.gameObject.activeInHierarchy == true)
+		{
+			player = GameObject.Find ("Player").GetComponent<Transform>();
+		}
 		heading = player.transform.position - this.transform.position;
 		heading.Normalize();
 
@@ -35,7 +38,7 @@ public class EnemyFollowScript : MonoBehaviour {
 			force = heading * speed;
 			this.rigidbody2D.AddForce(force);
 
-			if (playerController.gameObject.activeInHierarchy == false)
+			if (playerController.alive == false)
 			{
 				this.gameObject.SetActive(false);
 			}
@@ -58,20 +61,23 @@ public class EnemyFollowScript : MonoBehaviour {
 
 			if (collision.gameObject.name == "Player")
 			{
-				EmitParticles();
-				playerController.health--;
-				gameObject.SetActive(false);
+				if (playerController.alive == true)
+				{
+					EmitParticles();
+					playerController.health--;
+					gameObject.SetActive(false);
+				}
 			}
 		}
 	}
 
-	/*
+
 	void OnEnable()
 	{
 		player = GameObject.Find("Player").GetComponent<Transform>();
 		heading = player.transform.position - this.transform.position;
 		heading.Normalize();
-	}*/
+	}
 
 	void EmitParticles()
 	{

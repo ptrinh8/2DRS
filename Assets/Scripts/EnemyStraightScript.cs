@@ -37,7 +37,7 @@ public class EnemyStraightScript : MonoBehaviour {
 			rigidbody2D.velocity = heading * speed;
 		}
 
-		if (playerController.gameObject.activeInHierarchy == false)
+		if (playerController.alive == false)
 		{
 			this.gameObject.SetActive(false);
 		}
@@ -57,9 +57,12 @@ public class EnemyStraightScript : MonoBehaviour {
 
 			if (collision.gameObject.name == "Player")
 			{
-				EmitParticles();
-				playerController.health--;
-				gameObject.SetActive(false);
+				if (playerController.alive == true)
+				{
+					EmitParticles();
+					playerController.health--;
+					gameObject.SetActive(false);
+				}
 			}
 		}
 	}
@@ -82,13 +85,13 @@ public class EnemyStraightScript : MonoBehaviour {
 		}
 	}
 
-	/*
+
 	void OnEnable()
 	{
 		player = GameObject.Find("Player").GetComponent<Transform>();
 		heading = player.transform.position - this.transform.position;
 		heading.Normalize();
-	}*/
+	}
 
 	void OnBecameInvisible()
 	{

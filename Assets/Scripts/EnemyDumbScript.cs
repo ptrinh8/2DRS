@@ -36,7 +36,7 @@ public class EnemyDumbScript : MonoBehaviour {
 		}
 
 
-		if (playerController.gameObject.activeInHierarchy == false)
+		if (playerController.alive == false)
 		{
 			this.gameObject.SetActive(false);
 		}

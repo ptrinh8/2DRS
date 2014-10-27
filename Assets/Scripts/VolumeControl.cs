@@ -178,7 +178,7 @@ public class VolumeControl : MonoBehaviour {
 		{
 			if (kickAudio < .5 && kickLowestVolume < .5)
 			{
-				kickAudio += .001f;
+				kickAudio += .01f;
 			}
 			else
 			{
@@ -189,12 +189,12 @@ public class VolumeControl : MonoBehaviour {
 		{
 			if (kickAudio < kickLowestVolume)
 			{
-				kickAudio += .001f;
+				kickAudio += .01f;
 			}
 
 			if (kickAudio > kickLowestVolume)
 			{
-				kickAudio -= .001f;
+				kickAudio -= .01f;
 			}
 		}
 
@@ -202,7 +202,7 @@ public class VolumeControl : MonoBehaviour {
 		{
 			if (hatAudio < .5 && hatLowestVolume < .5)
 			{
-				hatAudio += .001f;
+				hatAudio += .01f;
 			}
 			else
 			{
@@ -213,12 +213,12 @@ public class VolumeControl : MonoBehaviour {
 		{
 			if (hatAudio < hatLowestVolume)
 			{
-				hatAudio += .001f;
+				hatAudio += .01f;
 			}
 
 			if (hatAudio > hatLowestVolume)
 			{
-				hatAudio -= .001f;
+				hatAudio -= .01f;
 			}
 		}
 
@@ -226,7 +226,7 @@ public class VolumeControl : MonoBehaviour {
 		{
 			if (clapAudio < .5 && clapLowestVolume < .5)
 			{
-				clapAudio += .001f;
+				clapAudio += .01f;
 			}
 			else
 			{
@@ -237,12 +237,12 @@ public class VolumeControl : MonoBehaviour {
 		{
 			if (clapAudio < clapLowestVolume)
 			{
-				clapAudio += .001f;
+				clapAudio += .01f;
 			}
 
 			if (clapAudio > clapLowestVolume)
 			{
-				clapAudio -= .001f;
+				clapAudio -= .01f;
 			}
 		}
 
@@ -250,7 +250,7 @@ public class VolumeControl : MonoBehaviour {
 		{
 			if (snareAudio < .5 && snareLowestVolume < .5)
 			{
-				snareAudio += .001f;
+				snareAudio += .01f;
 			}
 			else
 			{
@@ -261,12 +261,12 @@ public class VolumeControl : MonoBehaviour {
 		{
 			if (snareAudio < snareLowestVolume)
 			{
-				snareAudio += .001f;
+				snareAudio += .01f;
 			}
 
 			if (snareAudio > snareLowestVolume)
 			{
-				snareAudio -= .001f;
+				snareAudio -= .01f;
 			}
 		}
 
@@ -274,7 +274,7 @@ public class VolumeControl : MonoBehaviour {
 		{
 			if (glitchAudio < .5 && glitchLowestVolume < .5)
 			{
-				glitchAudio += .001f;
+				glitchAudio += .01f;
 			}
 			else
 			{
@@ -285,12 +285,12 @@ public class VolumeControl : MonoBehaviour {
 		{
 			if (glitchAudio < glitchLowestVolume)
 			{
-				glitchAudio += .001f;
+				glitchAudio += .01f;
 			}
 			
 			if (glitchAudio > glitchLowestVolume)
 			{
-				glitchAudio -= .001f;
+				glitchAudio -= .01f;
 			}
 		}
 
@@ -298,7 +298,7 @@ public class VolumeControl : MonoBehaviour {
 		{
 			if (gb1Pul1Audio < .5 && gb1Pul1LowestVolume < .5)
 			{
-				gb1Pul1Audio += .001f;
+				gb1Pul1Audio += .01f;
 			}
 			else
 			{
@@ -309,12 +309,12 @@ public class VolumeControl : MonoBehaviour {
 		{
 			if (gb1Pul1Audio < gb1Pul1LowestVolume)
 			{
-				gb1Pul1Audio += .001f;
+				gb1Pul1Audio += .01f;
 			}
 			
 			if (gb1Pul1Audio > gb1Pul1LowestVolume)
 			{
-				gb1Pul1Audio -= .001f;
+				gb1Pul1Audio -= .01f;
 			}
 		}
 
@@ -322,7 +322,7 @@ public class VolumeControl : MonoBehaviour {
 		{
 			if (gb1Pul2Audio < .5 && gb1Pul2LowestVolume < .5)
 			{
-				gb1Pul2Audio += .001f;
+				gb1Pul2Audio += .01f;
 			}
 			else
 			{
@@ -333,12 +333,12 @@ public class VolumeControl : MonoBehaviour {
 		{
 			if (gb1Pul2Audio < gb1Pul2LowestVolume)
 			{
-				gb1Pul2Audio += .001f;
+				gb1Pul2Audio += .01f;
 			}
 			
 			if (gb1Pul2Audio > gb1Pul2LowestVolume)
 			{
-				gb1Pul2Audio -= .001f;
+				gb1Pul2Audio -= .01f;
 			}
 		}
 
@@ -346,7 +346,7 @@ public class VolumeControl : MonoBehaviour {
 		{
 			if (gb1WavAudio < .5 && gb1WavLowestVolume < .5)
 			{
-				gb1WavAudio += .001f;
+				gb1WavAudio += .01f;
 			}
 			else
 			{
@@ -357,12 +357,12 @@ public class VolumeControl : MonoBehaviour {
 		{
 			if (gb1WavAudio < gb1WavLowestVolume)
 			{
-				gb1WavAudio += .001f;
+				gb1WavAudio += .01f;
 			}
 			
 			if (gb1WavAudio > gb1WavLowestVolume)
 			{
-				gb1WavAudio -= .001f;
+				gb1WavAudio -= .01f;
 			}
 		}
 
@@ -370,7 +370,7 @@ public class VolumeControl : MonoBehaviour {
 		{
 			if (gb2Pul1Audio < .5 && gb2Pul1LowestVolume < .5)
 			{
-				gb2Pul1Audio += .001f;
+				gb2Pul1Audio += .01f;
 			}
 			else
 			{
@@ -381,12 +381,12 @@ public class VolumeControl : MonoBehaviour {
 		{
 			if (gb2Pul1Audio < gb2Pul1LowestVolume)
 			{
-				gb2Pul1Audio += .001f;
+				gb2Pul1Audio += .01f;
 			}
 			
 			if (gb2Pul1Audio > gb2Pul1LowestVolume)
 			{
-				gb2Pul1Audio -= .001f;
+				gb2Pul1Audio -= .01f;
 			}
 		}
 
@@ -394,7 +394,7 @@ public class VolumeControl : MonoBehaviour {
 		{
 			if (gb2Pul2AndWavAudio < .5 && gb2Pul2AndWavLowestVolume < .5)
 			{
-				gb2Pul2AndWavAudio += .001f;
+				gb2Pul2AndWavAudio += .01f;
 			}
 			else
 			{
@@ -405,12 +405,12 @@ public class VolumeControl : MonoBehaviour {
 		{
 			if (gb2Pul2AndWavAudio < gb2Pul2AndWavLowestVolume)
 			{
-				gb2Pul2AndWavAudio += .001f;
+				gb2Pul2AndWavAudio += .01f;
 			}
 			
 			if (gb2Pul2AndWavAudio > gb2Pul2AndWavLowestVolume)
 			{
-				gb2Pul2AndWavAudio -= .001f;
+				gb2Pul2AndWavAudio -= .01f;
 			}
 		}
 
