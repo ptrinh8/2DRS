@@ -13,6 +13,8 @@ public class EnemyStraightScript : MonoBehaviour {
 	public Vector2 heading;
 
 	public ParticleSystem particles;
+
+	private PlayerController playerController;
 	
 	// Use this for initialization
 	void Start () {
@@ -22,6 +24,7 @@ public class EnemyStraightScript : MonoBehaviour {
 		heading = player.transform.position - this.transform.position;
 		heading.Normalize();
 		particles = GetComponent<ParticleSystem>();
+		playerController = GameObject.Find ("Player").GetComponent<PlayerController>();
 
 		
 	}
@@ -33,7 +36,11 @@ public class EnemyStraightScript : MonoBehaviour {
 		{
 			rigidbody2D.velocity = heading * speed;
 		}
-		
+
+		if (playerController.gameObject.activeInHierarchy == false)
+		{
+			this.gameObject.SetActive(false);
+		}
 	}
 	
 	void OnTriggerEnter2D(Collider2D collision)
@@ -51,6 +58,7 @@ public class EnemyStraightScript : MonoBehaviour {
 			if (collision.gameObject.name == "Player")
 			{
 				EmitParticles();
+				playerController.health--;
 				gameObject.SetActive(false);
 			}
 		}
@@ -74,12 +82,13 @@ public class EnemyStraightScript : MonoBehaviour {
 		}
 	}
 
+	/*
 	void OnEnable()
 	{
 		player = GameObject.Find("Player").GetComponent<Transform>();
 		heading = player.transform.position - this.transform.position;
 		heading.Normalize();
-	}
+	}*/
 
 	void OnBecameInvisible()
 	{

@@ -18,13 +18,17 @@ public class EnemyAvoidScript : MonoBehaviour {
 
 	private GameObject nearestBullet;
 
+	private PlayerController playerController;
+
 	List<GameObject> bulletPool;
 	
+
 	// Use this for initialization
 	void Start () {
 		
 		player = GameObject.Find("Player").GetComponent<Transform>();
 		bulletPool = GameObject.Find ("BulletPooler").GetComponent<BulletPooler>().pooledObjects;
+		playerController = GameObject.Find ("Player").GetComponent<PlayerController>();
 		
 	}
 	
@@ -97,6 +101,11 @@ public class EnemyAvoidScript : MonoBehaviour {
 			}
 		}
 
+		if (playerController.gameObject.activeInHierarchy == false)
+		{
+			this.gameObject.SetActive(false);
+		}
+
 		
 	}
 	
@@ -115,6 +124,7 @@ public class EnemyAvoidScript : MonoBehaviour {
 			if (collision.gameObject.name == "Player")
 			{
 				EmitParticles();
+				playerController.health--;
 				gameObject.SetActive(false);
 			}
 		}

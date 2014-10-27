@@ -13,12 +13,15 @@ public class EnemyDumbScript : MonoBehaviour {
 	public Vector2 heading;
 	public Vector2 force;
 
+	private PlayerController playerController;
+
 
 	// Use this for initialization
 	void Start () {
 		
 		player = GameObject.Find("Player").GetComponent<Transform>();
 		theCamera = GameObject.Find ("Main Camera").GetComponent<Camera>();
+		playerController = GameObject.Find ("Player").GetComponent<PlayerController>();
 		//heading = new Vector2(0, 0);
 		
 	}
@@ -32,6 +35,11 @@ public class EnemyDumbScript : MonoBehaviour {
 			this.rigidbody2D.AddForce(force);
 		}
 
+
+		if (playerController.gameObject.activeInHierarchy == false)
+		{
+			this.gameObject.SetActive(false);
+		}
 		/*
 		if (this.gameObject.transform.position.y > theCamera.orthographicSize)
 		{
@@ -63,6 +71,7 @@ public class EnemyDumbScript : MonoBehaviour {
 			if (collision.gameObject.name == "Player")
 			{
 				EmitParticles();
+				playerController.health--;
 				gameObject.SetActive(false);
 			}
 		}

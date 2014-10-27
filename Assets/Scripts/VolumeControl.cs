@@ -85,6 +85,7 @@ public class VolumeControl : MonoBehaviour {
 	private int songSection;
 	private Vector2 playerPosition;
 
+	private PlayerController player;
 	// Use this for initialization
 	void Start () {
 
@@ -160,6 +161,7 @@ public class VolumeControl : MonoBehaviour {
 		gb2Pul1LowestVolume = 0f;
 		gb2Pul2AndWavLowestVolume = 0f;
 
+		player = GameObject.Find ("Player").GetComponent<PlayerController>();
 	
 	}
 	
@@ -418,7 +420,10 @@ public class VolumeControl : MonoBehaviour {
 	void UpdatePositions()
 	{
 		songSection = GameObject.Find ("AudioSource").GetComponent<AudioXFade>().songSection;
-		playerPosition = GameObject.Find ("Player").transform.position;
+		if (player.gameObject.activeInHierarchy == true)
+		{
+			playerPosition = GameObject.Find ("Player").transform.position;
+		}
 
 		if (kickController.gameObject.activeInHierarchy == true)
 		{
@@ -508,100 +513,130 @@ public class VolumeControl : MonoBehaviour {
 
 	void UpdateLowestVolume()
 	{
-		if (kickHealth == 100)
+		if (kickController.gameObject.activeInHierarchy == true && kickController.killedOnce == false)
 		{
-			kickLowestVolume = 0f;
-		}
-		else
-		{
-			kickLowestVolume = 1f - (kickHealth * .01f);
-		}
-
-		if (clapHealth == 100)
-		{
-			clapLowestVolume = 0f;
-		}
-		else
-		{
-			clapLowestVolume = 1f - (clapHealth * .01f);
+			if (kickHealth == 100)
+			{
+				kickLowestVolume = 0f;
+			}
+			else
+			{
+				kickLowestVolume = 1f - (kickHealth * .01f);
+			}
 		}
 
-		if (hatLowestVolume == 100)
+		if (clapController.gameObject.activeInHierarchy == true && clapController.killedOnce == false)
 		{
-			hatLowestVolume = 0f;
-		}
-		else
-		{
-			hatLowestVolume = 1f - (hatHealth * .01f);
-		}
-
-		if (snareLowestVolume == 100)
-		{
-			snareLowestVolume = 0f;
-		}
-		else
-		{
-			snareLowestVolume = 1f - (snareHealth * .01f);
+			if (clapHealth == 100)
+			{
+				clapLowestVolume = 0f;
+			}
+			else
+			{
+				clapLowestVolume = 1f - (clapHealth * .01f);
+			}
 		}
 
-		if (glitchLowestVolume == 100)
+		if (hatController.gameObject.activeInHierarchy == true && hatController.killedOnce == false)
 		{
-			glitchLowestVolume = 0f;
-		}
-		else
-		{
-			glitchLowestVolume = 1f - (glitchHealth * .01f);
-		}
-
-		if (gb1Pul1LowestVolume == 100)
-		{
-			gb1Pul1LowestVolume = 0f;
-		}
-		else
-		{
-			gb1Pul1LowestVolume = 1f - (gb1Pul1Health * .01f);
+			if (hatLowestVolume == 100)
+			{
+				hatLowestVolume = 0f;
+			}
+			else
+			{
+				hatLowestVolume = 1f - (hatHealth * .01f);
+			}
 		}
 
-		if (gb1Pul2LowestVolume == 100)
+		if (snareController.gameObject.activeInHierarchy == true && snareController.killedOnce == false)
 		{
-			gb1Pul2LowestVolume = 0f;
-		}
-		else
-		{
-			gb1Pul2LowestVolume = 1f - (gb1Pul2Health * .01f);
-		}
-
-		if (gb1WavLowestVolume == 100)
-		{
-			gb1WavLowestVolume = 0f;
-		}
-		else
-		{
-			gb1WavLowestVolume = 1f - (gb1WavHealth * .01f);
+			if (snareLowestVolume == 100)
+			{
+				snareLowestVolume = 0f;
+			}
+			else
+			{
+				snareLowestVolume = 1f - (snareHealth * .01f);
+			}
 		}
 
-		if (gb2Pul1LowestVolume == 100)
+		if (glitchController.gameObject.activeInHierarchy == true && glitchController.killedOnce == false)
 		{
-			gb2Pul1LowestVolume = 0f;
+			if (glitchLowestVolume == 100)
+			{
+				glitchLowestVolume = 0f;
+			}
+			else
+			{
+				glitchLowestVolume = 1f - (glitchHealth * .01f);
+			}
 		}
-		else
+
+		if (gb1Pul1Controller.gameObject.activeInHierarchy == true && gb1Pul1Controller.killedOnce == false)
 		{
-			gb2Pul1LowestVolume = 1f - (gb2Pul1Health * .01f);
+			if (gb1Pul1LowestVolume == 100)
+			{
+				gb1Pul1LowestVolume = 0f;
+			}
+			else
+			{
+				gb1Pul1LowestVolume = 1f - (gb1Pul1Health * .01f);
+			}
 		}
-							
-		if (gb2Pul2AndWavLowestVolume == 100)
+
+		if (gb1Pul2Controller.gameObject.activeInHierarchy == true && gb1Pul2Controller.killedOnce == false)
 		{
-			gb2Pul2AndWavLowestVolume = 0f;
+			if (gb1Pul2LowestVolume == 100)
+			{
+				gb1Pul2LowestVolume = 0f;
+			}
+			else
+			{
+				gb1Pul2LowestVolume = 1f - (gb1Pul2Health * .01f);
+			}
 		}
-		else
+
+		if (gb1WavController.gameObject.activeInHierarchy == true && gb1WavController.killedOnce == false)
 		{
-			gb2Pul2AndWavLowestVolume = 1f - (gb2Pul2AndWavHealth * .01f);
+			if (gb1WavLowestVolume == 100)
+			{
+				gb1WavLowestVolume = 0f;
+			}
+			else
+			{
+				gb1WavLowestVolume = 1f - (gb1WavHealth * .01f);
+			}
+		}
+
+		if (gb2Pul1Controller.gameObject.activeInHierarchy == true && gb2Pul1Controller.killedOnce == false)
+		{
+			if (gb2Pul1LowestVolume == 100)
+			{
+				gb2Pul1LowestVolume = 0f;
+			}
+			else
+			{
+				gb2Pul1LowestVolume = 1f - (gb2Pul1Health * .01f);
+			}
+		}
+			
+		if (gb2Pul2AndWavController.gameObject.activeInHierarchy == true && gb2Pul2AndWavController.killedOnce == false)
+		{
+			if (gb2Pul2AndWavLowestVolume == 100)
+			{
+				gb2Pul2AndWavLowestVolume = 0f;
+			}
+			else
+			{
+				gb2Pul2AndWavLowestVolume = 1f - (gb2Pul2AndWavHealth * .01f);
+			}
 		}
 	}
 
 	void UpdateAudioVolume()
 	{
-		for (int i = 0; i < 13; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			kickArray[i].volume = kickAudio;
 			clapArray[i].volume = clapAudio;

@@ -91,7 +91,7 @@ public class MetronomeTimer : MonoBehaviour {
 		{
 			bpm = 124;	
 		}*/
-		measureLengthInSamples = (240f / bpm) * 48000f;
+		measureLengthInSamples = (240f / bpm) * 44100f;
 		measureSixteenth = measureLengthInSamples / 16f;
 		subdivisions = new int[]{(int)measureSixteenth * 0, (int)measureSixteenth * 1, (int)measureSixteenth * 2, (int)measureSixteenth * 3, (int)measureSixteenth * 4, (int)measureSixteenth * 5, (int)measureSixteenth * 6, 
 								 (int)measureSixteenth * 7, (int)measureSixteenth * 8, (int)measureSixteenth * 9, (int)measureSixteenth * 10, (int)measureSixteenth * 11, (int)measureSixteenth * 12, (int)measureSixteenth * 13, 

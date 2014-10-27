@@ -12,10 +12,14 @@ public class EnemyFollowScript : MonoBehaviour {
 	public Vector2 heading;
 	public Vector2 force;
 
+	private PlayerController playerController;
+
+
 	// Use this for initialization
 	void Start () {
 
 		player = GameObject.Find("Player").GetComponent<Transform>();
+		playerController = GameObject.Find ("Player").GetComponent<PlayerController>();
 	
 	}
 	
@@ -30,8 +34,14 @@ public class EnemyFollowScript : MonoBehaviour {
 		{
 			force = heading * speed;
 			this.rigidbody2D.AddForce(force);
+
+			if (playerController.gameObject.activeInHierarchy == false)
+			{
+				this.gameObject.SetActive(false);
+			}
 		}
 	
+
 	}
 
 	void OnTriggerEnter2D(Collider2D collision)
@@ -49,17 +59,19 @@ public class EnemyFollowScript : MonoBehaviour {
 			if (collision.gameObject.name == "Player")
 			{
 				EmitParticles();
+				playerController.health--;
 				gameObject.SetActive(false);
 			}
 		}
 	}
 
+	/*
 	void OnEnable()
 	{
 		player = GameObject.Find("Player").GetComponent<Transform>();
 		heading = player.transform.position - this.transform.position;
 		heading.Normalize();
-	}
+	}*/
 
 	void EmitParticles()
 	{

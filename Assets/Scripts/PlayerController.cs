@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour {
 
 	//Handling
 	public float rotationSpeed = 450f;
-	private float speed = 5;
+	private float speed = 7.5f;
 	//public float gravity = 20.0f;
 	public float timer;
 
@@ -22,12 +22,14 @@ public class PlayerController : MonoBehaviour {
 
 	private float boostTimer;
 	private float boostTime;
-	private float boostRechargeTime = 6f;
+	private float boostRechargeTime = 3f;
 	public float boostRechargeTimer;
 	private Vector3 boostDirection = Vector3.zero;
 
 	public float vertExtent;
 	public float horzExtent;
+
+	public float respawnTime = 3f;
 
 	private bool boosting = false;
 	public bool canBoost = true;
@@ -222,9 +224,9 @@ public class PlayerController : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D collision)
 	{
 		//Debug.Log ("hit");
-		if (collision.gameObject.name == "EnemyFollow(Clone)" || collision.gameObject.name == "EnemyStraight(Clone)" || collision.gameObject.name == "EnemyDumb(Clone)")
+		if (collision.gameObject.name == "EnemyFollow(Clone)" || collision.gameObject.name == "EnemyStraight(Clone)" || collision.gameObject.name == "EnemyDumb(Clone)" || collision.gameObject.name == "EnemyAvoid(Clone)")
 		{
-			//collision.gameObject.SetActive(false);
+			//health--;
 		}
 	}
 }

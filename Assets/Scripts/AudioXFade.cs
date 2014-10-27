@@ -23,7 +23,18 @@ public class AudioXFade : MonoBehaviour {
 
 	private int spawnKillAmount1;
 	private int spawnKillAmount2;
-	private int numberOfSongSections = 2;
+	private int spawnKillAmount3;
+	private int spawnKillAmount4;
+	private int spawnKillAmount5;
+	private int spawnKillAmount6;
+	private int spawnKillAmount7;
+	private int spawnKillAmount8;
+	private int spawnKillAmount9;
+	private int spawnKillAmount10;
+	private int spawnKillAmount11;
+	private int spawnKillAmount12;
+	private int spawnKillAmount13;
+	private int numberOfSongSections;
 	private int[] spawnKillArray;
 	private int loopArrayIterator = 0;
 	private AudioSource numberOfLoops;
@@ -44,6 +55,8 @@ public class AudioXFade : MonoBehaviour {
 	public bool isLoopPlaying = false;
 
 	public SongScript songScript;
+
+	private PlayerController player;
 
 	
 	// Use this for initialization
@@ -90,12 +103,22 @@ public class AudioXFade : MonoBehaviour {
 		metronome = GameObject.Find ("AudioSource").GetComponent<MetronomeTimer>();
 		loop = GameObject.Find ("LoopLoop1").GetComponent<AudioSource>();
 		spawnsKilled = GameObject.Find ("Player").GetComponent<PlayerController>().spawnsKilled;
-		numberOfSongSections = 2;
-		spawnKillAmount1 = 1;
-		spawnKillAmount2 = 5;
-		spawnKillArray = new int[]{spawnKillAmount1, spawnKillAmount2};
+		numberOfSongSections = 10;
+		spawnKillAmount1 = 2;
+		spawnKillAmount2 = 6;
+		spawnKillAmount3 = 12;
+		spawnKillAmount4 = 20;
+		spawnKillAmount5 = 29;
+		spawnKillAmount6 = 39;
+		spawnKillAmount7 = 43;
+		spawnKillAmount8 = 50;
+		spawnKillAmount9 = 55;
 
-		loopLoopNumber = 13;
+		spawnKillArray = new int[]{spawnKillAmount1, spawnKillAmount2, spawnKillAmount3, spawnKillAmount4, spawnKillAmount5, spawnKillAmount6, spawnKillAmount7, spawnKillAmount8, spawnKillAmount9, spawnKillAmount10};
+
+		loopLoopNumber = 10;
+
+		player = GameObject.Find ("Player").GetComponent<PlayerController>();
 
 
 		loopArray = new AudioSource[loopLoopNumber];
@@ -159,6 +182,7 @@ public class AudioXFade : MonoBehaviour {
 			{
 				songSection++;
 				clipTriggered = false;
+				songScript.activeChecked = false;
 			}
 		}
 		yield return null;
@@ -209,7 +233,10 @@ public class AudioXFade : MonoBehaviour {
 	
 	void FixedUpdate()
 	{
-		spawnsKilled = GameObject.Find ("Player").GetComponent<PlayerController>().spawnsKilled;
+		if (player.gameObject.activeInHierarchy)
+		{
+			spawnsKilled = GameObject.Find ("Player").GetComponent<PlayerController>().spawnsKilled;
+		}
 		StartCoroutine(waitUntilEnd());
 		isLoopPlaying = loopArray[songSection].isPlaying;
 		//dspTime = AudioSettings.dspTime;
@@ -286,7 +313,8 @@ public class AudioXFade : MonoBehaviour {
 				gb2Pul2AndWavArray[songSection].loop = false;
 
 				clipTriggered = true;
-				songScript.activeChecked = false;
+				//songScript.activeChecked = false;
+
 			}
 		}
 	}

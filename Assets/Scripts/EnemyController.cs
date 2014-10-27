@@ -17,6 +17,10 @@ public class EnemyController : MonoBehaviour {
 	public Color instrumentColor;
 	private Camera theCamera;
 
+	public bool killedOnce = false;
+
+	public bool colorWorks = false;
+
 	private SongScript songScript;
 
 	// Use this for initialization
@@ -39,10 +43,11 @@ public class EnemyController : MonoBehaviour {
 		if (health <= 0)
 		{
 			player.spawnsKilled++;
+			killedOnce = true;
 			this.gameObject.SetActive(false);
 		}
 
-		if (this.transform.localScale.x >= .75f)
+		if (this.transform.localScale.x >= 1f)
 		{
 			this.transform.localScale -= new Vector3(.02f, .02f, 0f);
 		}
@@ -74,7 +79,7 @@ public class EnemyController : MonoBehaviour {
 		{
 			if (enemyType == 1)
 			{
-				for (int i = 0; i <= numberOfEnemies; i++)
+				for (int i = 0; i < numberOfEnemies; i++)
 				{
 					GameObject enemy = EnemyFollowPooler.current.GetPooledObject();
 					if (enemy == null)
@@ -91,7 +96,7 @@ public class EnemyController : MonoBehaviour {
 			else if (enemyType == 2)
 			{
 				position = new Vector2(this.transform.position.x, this.transform.position.y);
-				for (int i = 0; i <= numberOfEnemies; i++)
+				for (int i = 0; i < numberOfEnemies; i++)
 				{
 					GameObject enemy = EnemyStraightPooler.current.GetPooledObject();
 					if (enemy == null)
@@ -109,7 +114,7 @@ public class EnemyController : MonoBehaviour {
 			{
 				/*angle = 360f / (float)numberOfEnemies;
 				enemyHeading = 0;*/
-				for (int i = 0; i <= numberOfEnemies; i++)
+				for (int i = 0; i < numberOfEnemies; i++)
 				{
 					GameObject enemy = EnemyDumbPooler.current.GetPooledObject();
 					enemyDumb = enemy.GetComponent<EnemyDumbScript>();
@@ -139,7 +144,7 @@ public class EnemyController : MonoBehaviour {
 			}
 			else if (enemyType == 4)
 			{
-				for (int i = 0; i <= numberOfEnemies; i++)
+				for (int i = 0; i < numberOfEnemies; i++)
 				{
 					GameObject enemy = EnemyAvoidPooler.current.GetPooledObject();
 					if (enemy == null)
@@ -153,8 +158,8 @@ public class EnemyController : MonoBehaviour {
 					position = new Vector2((this.transform.position.x + (Random.Range(-1, 1) * .75f)), (this.transform.position.y + (Random.Range(-1, 1) * .75f)));
 				}
 			}
-			this.transform.localScale = new Vector3(2f, 2f, 1f);
-			if (this.gameObject.name != "Hat")
+			this.transform.localScale = new Vector3(3f, 3f, 1f);
+			if (colorWorks == true)
 			{
 				theCamera.backgroundColor = instrumentColor;
 				songScript.cameraColor = instrumentColor;
