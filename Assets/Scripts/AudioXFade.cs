@@ -6,6 +6,7 @@ public class AudioXFade : MonoBehaviour {
 	private AudioSource silence;
 	private AudioSource loop;
 	private AudioSource loop2;
+	private AudioSource shootingArp;
 	public AudioSource[] loopArray;
 	
 	public AudioSource[] kickArray;
@@ -120,6 +121,7 @@ public class AudioXFade : MonoBehaviour {
 		loopLoopNumber = 10;
 
 		player = GameObject.Find ("Player").GetComponent<PlayerController>();
+		shootingArp = GameObject.Find ("ShootingArp").GetComponent<AudioSource>();
 
 
 		loopArray = new AudioSource[loopLoopNumber];
@@ -165,6 +167,7 @@ public class AudioXFade : MonoBehaviour {
 					gb2Pul1Array[0].Play ();
 					gb2Pul2AndWavArray[0].Play();
 					gb1NoiseArray[0].Play();
+					shootingArp.Play();
 					silence.Play();
 					silence.loop = true;
 					songSection = 0;

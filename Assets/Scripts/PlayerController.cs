@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour {
 	public float vertExtent;
 	public float horzExtent;
 
-	public float respawnTime = 3f;
+	public float respawnTime = 1.5f;
 
 	public bool boosting = false;
 	public bool canBoost = true;
@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour {
 	public bool alive = true;
 	public float respawnTimer;
 	public Vector2 respawnPosition;
+
+	private AudioSource shootingArp;
 
 	private ParticleSystem particleSystem;
 	//Components
@@ -60,6 +62,8 @@ public class PlayerController : MonoBehaviour {
 
 		boostTime = .5f;
 		respawnTime = 3f;
+
+		shootingArp = GameObject.Find ("ShootingArp").GetComponent<AudioSource>();
 
 		particleSystem = this.GetComponent<ParticleSystem>();
 	}
@@ -113,7 +117,7 @@ public class PlayerController : MonoBehaviour {
 					boostTimer += Time.deltaTime;
 					if (boostTimer <= boostTime)
 					{
-						speed = 20;
+						speed = 25;
 						moveDirection = boostDirection;
 					}
 					else
@@ -130,27 +134,33 @@ public class PlayerController : MonoBehaviour {
 
 				if (direction.magnitude > 0) {
 
-				//angle = angle * 180/Mathf.PI + 90;
-				if (direction.magnitude > radialDeadZone)
-				{
-					Vector3 targetRotation = new Vector3(0,0,angle);
-					direction.Normalize();
-					bulletDirection.x = direction.x * bulletSpeed;
-					bulletDirection.y = direction.y * bulletSpeed;
-					timer += Time.deltaTime;
-					if (timer >= bulletFireRate)
+					//angle = angle * 180/Mathf.PI + 90;
+					if (direction.magnitude > radialDeadZone)
 					{
-						FireBullet();
-						timer = 0;
+						Vector3 targetRotation = new Vector3(0,0,angle);
+						direction.Normalize();
+						bulletDirection.x = direction.x * bulletSpeed;
+						bulletDirection.y = direction.y * bulletSpeed;
+						timer += Time.deltaTime;
+						if (timer >= bulletFireRate)
+						{
+							FireBullet();
+							timer = 0;
+						}
+						Debug.Log (angle);
+						transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(targetRotation), 1f);
+						shootingArp.volume = 1f;
 					}
-					Debug.Log (angle);
-					transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(targetRotation), 1f);
+					else
+					{
+						timer = 0;
+						shootingArp.volume = 0f;
+					}
+
 				}
 				else
 				{
-					timer = 0;
-				}
-
+					shootingArp.volume = 0f;
 				}
 
 			} 
@@ -169,11 +179,16 @@ public class PlayerController : MonoBehaviour {
 					Vector3 direction = (Input.mousePosition - mouse).normalized;
 					bulletDirection.x = direction.x * bulletSpeed;
 					bulletDirection.y = direction.y * bulletSpeed;
+					shootingArp.volume = 1f;
 					if (timer >= bulletFireRate)
 					{
 						FireBullet();
 						timer = 0;
 					}
+				}
+				else
+				{
+					shootingArp.volume = 0f;
 				}
 
 				if (canBoost == true)

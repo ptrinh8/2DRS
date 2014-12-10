@@ -16,6 +16,8 @@ public class EnemyController : MonoBehaviour {
 	public float angle;
 	public Color instrumentColor;
 	private Camera theCamera;
+	private AudioSource surroundOneShot;
+	private bool oneShotPlayed;
 
 	public Color controllerColor;
 
@@ -40,6 +42,8 @@ public class EnemyController : MonoBehaviour {
 		songScript = GameObject.Find ("SongScript").GetComponent<SongScript>();
 		this.sprite.color = new Color(0f, 0f, 0f);
 		controllerColor = this.sprite.color;
+		surroundOneShot = GameObject.Find ("SurroundOneShot").GetComponent<AudioSource>();
+		oneShotPlayed = false;
 	}
 	
 	// Update is called once per frame
@@ -50,6 +54,12 @@ public class EnemyController : MonoBehaviour {
 		controllerColor.g = 1 - (health * .02f);
 		controllerColor.b = 1 - (health * .02f);
 
+		if (health <= 25 && oneShotPlayed == false && alive == true)
+		{
+			surroundOneShot.Play();
+			oneShotPlayed = true;
+		}
+
 		if (health <= 0 && alive == true)
 		{
 			player.spawnsKilled++;
@@ -59,6 +69,11 @@ public class EnemyController : MonoBehaviour {
 			killedOnce = true;
 			alive = false;
 			//this.gameObject.SetActive(false);
+		}
+
+		if (alive == false)
+		{
+			oneShotPlayed = false;
 		}
 
 		if (this.transform.localScale.x >= 1f)
