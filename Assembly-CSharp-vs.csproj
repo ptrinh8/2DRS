@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\ParticleSystemScript.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\SongScript.cs" />
+     <Compile Include="Assets\Scripts\VOScript.cs" />
      <Compile Include="Assets\Scripts\VolumeControl.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
